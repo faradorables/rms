@@ -1,0 +1,107 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/templates.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/mailbox.js') }}"></script>
+    <script>
+      _loading(0);
+    </script>
+    <script>
+        _sent();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="mailboxes_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Mailboxes</h1>
+      </div>
+    </div>
+    <div class="_container">
+
+      <div class="_row">
+        <div class="col_2 project_nav">
+          <button onclick="composeForm()"><i class="fa fa-plus"></i>Compose</button>
+          <div class="card project_card">
+            <div class="title">Folder<a class="_toggle" data-target="folder"><i class="fa fa-plus"></i></a></div>
+            <div class="menu collapse in" id="folder">
+              <a>Inbox<span class="positive">20</span></a>
+              <a onclick="_sent()">Sent<span class="positive" id="total_message">20</span></a>
+              <a>Draft<span class="negative">20</span></a>
+              <a onclick="_trash()">Trash<span class="negative" id="total_trash">20</span></a>
+            </div>
+            <div class="title">Labels<a class="_toggle" data-target="important"><i class="fa fa-plus"></i></a></div>
+            <div class="menu collapse in" id="important">
+              <a>Important</a>
+              <a>Starred</a>
+            </div>
+          </div>
+        </div>
+        <div class="col_8">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fa fa-envelope"></i>Mailboxes
+              <div class="_filter">
+                <form>
+                  <input type="text" placeholder="Search Messages">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+
+            <div class="modal fade" id="composeForm" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      Create Message
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col_10" style="padding-top: 0;">
+                        <div class="card chart_card table_card _table_pagination">
+                            <div class="_register">
+                              <!-- <form> -->
+                                <input id="subject" name="subject" type="text" placeholder="Subject">
+                                <input id="link" name="id_user" type="text" placeholder="Link">
+                                <select id="category_body" name="role" placeholder="Role">
+                                  <option value="" disabled selected>Select Category..</option>
+                                </select>
+                                <input id="image" type="file" name="image" placeholder="Select an Icon">
+                                <textarea id="content" name="content" type="text" placeholder="Content" rows="4" cols="141"></textarea>
+                                <button class="button_submit" data-dismiss="modal" onclick="add_message()">Send</button>
+                              <!-- </form> -->
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="data_body"></div>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+{% endblock %}

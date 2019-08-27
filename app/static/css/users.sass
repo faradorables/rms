@@ -1,0 +1,2709 @@
+/**
+ * Developed by ION Developer Team
+ * URL : https://ion.id
+
+$primary-color: #392c70
+$secondary-color: lighten($primary-color, 30%)
+$main-background-color: #fff
+$secondary-background-color: #eee
+$primary-font: 'Futura Light'
+$secondary-font: 'Futura Medium'
+$third-font: 'Futura Bold'
+$transition: 150ms
+
+div[data-role="main"]
+  padding: 0
+
+.pButton
+  font-weight: lighter
+
+main#auth_login
+  background-color: $main-background-color
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  height: 100vh
+  padding: 20px
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  >a.back
+    position: fixed
+    left: 10px
+    top: 10px
+    border: 2px solid $primary-color
+    padding: 12.5px
+    border-radius: 100%
+    >i
+      color: #000
+  >form
+    width: 400px
+    padding: 25px 15px 50px
+    display: flex
+    flex-direction: column
+    >img
+      border: 1px solid #fff
+      padding: 7px
+      margin: 0 auto
+      display: block
+      width: 100px
+    >button
+      background: $primary-color
+      padding: 10px
+      color: #fff
+      font-family: $primary-font
+      font-weight: normal
+      font-size: 15px
+      letter-spacing: 2px
+      min-height: 40px
+  >a.register
+    position: fixed
+    bottom: 0
+    width: 100%
+    text-align: center
+    border-top: 1px solid #aaa
+    padding: 12.5px 0px
+    color: #000
+    background: #eee
+    box-shadow: 0 0 5px 5px black
+    >span
+      font-weight: bolder
+      color: $primary-color
+
+main#auth_register
+  height: 100%
+  padding: 60px 0 10px
+  width: 100%
+  justify-content: center
+  align-items: center
+  >nav
+    background: $primary-color
+    height: 60px
+    display: flex
+    align-items: center
+    position: fixed
+    width: 100%
+    z-index: 10
+    >a
+      color: white
+      font-size: 25px
+      padding: 10px
+      width: 15%
+      text-align: center
+    >div
+      height: 100%
+      >img
+        max-height: 100%
+        padding: 15px 0
+  >form
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    width: 100%
+    padding: 10px
+    border-radius: 3px
+    position: relative
+    >div.form-group
+      width: 100%
+      font-size: 25px
+      flex-direction: column
+      justify-content: center
+      margin: 0
+      >p
+        font-size: 14px
+        font-weight: lighter
+        text-align: left
+        margin: 10px 0 0
+      >label
+        font-size: 12px
+        color: #fff
+        font-family: $primary-font
+      >input
+        color: #fff
+        text-align: left
+        width: 100%
+        background: transparent
+        outline: none
+        border: none
+        border-bottom: 2px solid #fff
+        border-radius: 0
+        font-weight: lighter
+        font-size: 13px
+    >button
+      background: $primary-color
+      margin-top: 10px
+      color: white
+      padding: 10px
+      width: 100%
+      outline: none
+      border: none
+      border-radius: 3px
+      transition: 50ms
+    >div.notification-box
+      position: absolute
+      width: 90%
+      justify-content: center
+      align-items: center
+      background: #fff
+      height: 50px
+      box-shadow: 0 0 5px 0px
+      border-radius: 1px
+      top: 10px
+      color: darkred
+      font-family: $primary-font
+      padding: 10px
+      font-size: 12px
+      display: none
+      justify-content: space-between
+      z-index: 11
+      >span
+        color: darkred
+      >a
+        margin-left: 10px
+        font-weight: bolder
+        color: darkred
+
+main#auth_reset
+  padding: 70px 10px 0
+  padding-left: calc(20% + 10px)
+  >nav
+    background: $primary-color
+    height: 60px
+    display: flex
+    align-items: center
+    position: fixed
+    width: 100%
+    z-index: 10
+    >a
+      color: white
+      font-size: 25px
+      padding: 10px
+      width: 15%
+      text-align: center
+    >div
+      height: 100%
+      >img
+        max-height: 100%
+        padding: 15px 0
+  >form
+    margin: 0 auto
+    width: 50%
+    height: 300px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    background: #fff
+    padding: 10px
+    border-radius: 3px
+    position: relative
+    >div.form-group
+      width: 100%
+      font-size: 25px
+      display: flex
+      flex-direction: column
+      justify-content: center
+      position: relative
+      >p
+        font-size: 14px
+        font-weight: lighter
+        text-align: left
+        margin: 10px 0 0
+      >label
+        font-size: 15px
+        font-family: $primary-font
+      >input
+        text-align: left
+        width: 100%
+        background: transparent
+        outline: none
+        border: none
+        border-bottom: 2px solid #000
+        border-radius: 0
+        color: #000
+        font-weight: lighter
+        font-size: 20px
+      >input[type=tel]
+        position: absolute
+        bottom: 0
+        opacity: 0
+    >div.notification-box
+      position: absolute
+      width: 90%
+      align-items: center
+      background: #fff
+      height: 50px
+      box-shadow: 0 0 5px 0px
+      border-radius: 1px
+      top: -60px
+      color: darkred
+      font-family: $primary-font
+      padding: 10px
+      font-size: 12px
+      display: none
+      justify-content: space-between
+      z-index: 11
+      >span
+        color: darkred
+      >a
+        margin-left: 10px
+        font-weight: bolder
+        color: darkred
+    >div.notif
+      background: rgba($primary-color, 0.3)
+      border: 1px solid $primary-color
+      margin-top: 15px
+      margin-bottom: 15px
+      padding: 10px
+      color: #151515
+    >button
+      background: $main-background-color
+      color: white
+      padding: 10px
+      width: 100%
+      outline: none
+      border: none
+      border-radius: 3px
+      transition: 50ms
+      &:active
+
+
+main#home_index
+  background-image: url("/static/src/background/bg.jpg")
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center
+  display: flex
+  justify-content: center
+  align-items: center
+  min-height: 100vh
+  text-align: center
+  >div
+    >img
+      min-width: 150px
+      max-width: 300px
+    >p
+      color: #fff
+      font-size: 25px
+      letter-spacing: 4px
+      text-shadow: none
+      margin: 50px 0 75px
+    >div
+      display: flex
+      justify-content: center
+      >a
+        color: white
+        font-weight: lighter
+        border: 1px solid #fff
+        padding: 10px 40px
+        margin: 10px
+        border-radius: 5px
+        transition: 300ms
+        &:hover
+          background: #fff
+          color: black
+
+main#home_index_inner
+  background: $main-background-color
+  padding: 60px 0 0 20%
+  >div.shop_opt
+    display: flex
+    >div.body
+      margin: 0 auto
+      margin: 10px 10px 20px
+      min-height: 200px
+      width: calc(100% - 20px)
+      padding: 10px
+      background: $secondary-background-color
+      border-radius: 1px
+      >div.title
+        color: $primary-color
+        padding: 5px
+        text-transform: uppercase
+        font-size: 14px
+        letter-spacing: 1px
+        width: 100%
+        border-bottom: 2px solid $primary-color
+        border-left: 10px solid $primary-color
+      >div.option
+        display: flex
+        padding: 0
+        justify-content: center
+        align-items: center
+        height: calc(100% - 35px)
+        flex-direction: column
+        >p
+          font-family: $primary-font
+          color: $primary-color
+          font-size: 25px
+          margin: 0
+        >a
+          display: flex
+          flex-direction: column
+          align-items: center
+          justify-content: center
+          width: 30%
+          height: 40px
+          margin: 10px 10px 0
+          text-decoration: none
+          background: $primary-color
+          color: $secondary-background-color
+          font-family: $primary-font
+          border-radius: 2px
+          outline: none
+
+main#pulsa_data_pln_prabayar
+  padding: 60px 0 0
+  background: $main-background-color
+  height: 100%
+  >form
+    height: 100%
+    position: relative
+    >div.phase
+      padding: 0 10px
+      height: 100%
+      position: absolute
+      top: 0
+      display: flex
+      flex-direction: column
+      width: 100%
+      transition: 300ms
+    >div.phase_1
+      left: 0
+      >div.first-field
+        display: flex
+        flex-direction: column
+        justify-content: center
+        >p.header
+          font-family: $primary-font
+          font-weight: bolder
+          color: #fff
+          margin: 20px 0 10px
+        >input
+          padding: 10px 0
+          border: none
+          border-bottom: 1px solid #fff
+          outline: none
+          margin-bottom: 10px
+          font-family: $primary-font
+          font-size: 22px
+          background: transparent
+          color: #fff
+          &#username
+            font-family: inherit
+        >select, p.type
+          text-align: center
+          border: 1px solid #fff
+          border-radius: 0
+          display: flex
+          padding: 10px
+          outline: none
+          margin-bottom: 10px
+          font-family: $primary-font
+          font-size: 22px
+          justify-content: center
+          background: transparent
+          height: 50px
+        >div
+          margin-bottom: 10px
+          height: 75px
+          display: flex
+          align-items: center
+          justify-content: center
+          &.pulsa_prabayar
+            display: none
+          >img
+            max-width: 50%
+            max-height: 75px
+            filter: drop-shadow(0px 0px 1px #eee)
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          transition: 300ms
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          letter-spacing: 2px
+          font-weight: bolder
+          border: none
+          border-radius: 3px
+          margin: 5px
+    >div.phase_2
+      left: 100%
+      >p.header
+        margin: 0
+        padding-top: 10px
+        font-family: $primary-font
+        color: #fff
+        font-size: 17.5px
+        text-align: center
+      >p.number
+        margin: 0
+        padding-bottom: 10px
+        font-family: $primary-font
+        font-size: 25px
+        text-align: center
+        color: #fff
+        display: flex
+        flex-direction: column
+        >b
+          font-weight: lighter
+          font-size: 12px
+          color: #fff
+        >span
+          color: #fff
+      >div.value
+        display: flex
+        flex-direction: column
+        height: calc(100% - 150px)
+        overflow: auto
+        >div.profile
+          padding: 0
+          display: flex
+          flex-direction: column
+          position: relative
+          >div#pro_loader
+            position: absolute
+            width: 100%
+            >img
+              margin: 0 auto
+              display: block
+              max-width: 50px
+          >div.profile_inquiry
+            border-radius: 1px
+            background: #fff
+            padding: 10px
+            width: calc(100% - 20px)
+            margin: 0 auto
+            margin-top: 5px
+            >p.title
+              color: $primary-color
+              margin: 0
+              font-weight: bolder
+            >p.detail
+              color: #151515
+        >label
+          width: 98%
+          margin: 1%
+          display: flex
+          color: $primary-color
+          justify-content: center
+          align-items: center
+          min-height: 90px
+          background: #fff
+          transition: 300ms
+          letter-spacing: 2px
+          border-radius: 5px
+          flex-direction: column
+          >p
+            margin: 0
+            font-family: $primary-font
+            color: #151515
+            &.price
+              font-size: 11px
+        >input[type=radio]
+          display: none
+          &:checked + label
+            min-height: 100px
+            font-size: 16px
+            background: #fff
+            color: $primary-color
+            border-top: 10px solid $primary-color
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          transition: 300ms
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          font-weight: bolder
+          letter-spacing: 2px
+          border: none
+          border-radius: 3px
+          margin: 5px
+    >div.phase_inquiry
+      left: 100%
+      >div
+        height: calc(100% - 60px)
+        overflow: auto
+        padding-bottom: 10px
+        >p.header
+          padding-top: 10px
+          font-family: $primary-font
+          font-size: 17.5px
+          color: #151515
+          text-align: center
+        >p.number
+          margin: 0
+          font-family: $primary-font
+          font-size: 27.5px
+          text-align: center
+          color: #151515
+        >div.value
+          display: flex
+          flex-direction: column
+          >div.logo
+            margin: 10px 0
+            padding-bottom: 10px
+            height: 75px
+            display: flex
+            align-items: center
+            justify-content: center
+            >img
+              max-width: 50%
+              max-height: 75px
+              filter: drop-shadow(0px 0px 1px #eee)
+          >div.profile
+            padding: 0
+            display: flex
+            flex-direction: column
+            position: relative
+            >div#pro_loader
+              position: absolute
+              width: 100%
+              >img
+                margin: 0 auto
+                display: block
+                max-width: 50px
+            >div.profile_inquiry
+              padding: 10px
+              width: calc(100% - 20px)
+              margin: auto
+              margin-bottom: 20px
+              border-radius: 5px
+              >p.title
+                color: #1f1f1f
+                border-bottom: 1px solid
+                padding-bottom: 5px
+              >p.detail
+                color: #151515
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          transition: 300ms
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          font-weight: bolder
+          letter-spacing: 2px
+          border: none
+          border-radius: 3px
+          margin: 5px
+    >div.phase_3
+      left: 200%
+      >div
+        height: calc(100% - 60px)
+        overflow: auto
+        padding-bottom: 10px
+        >div.header
+          padding: 10px 5px 0
+          display: flex
+          margin-bottom: 10px
+          justify-content: center
+          >p
+            margin: 0
+            font-weight: normal
+            text-shadow: none
+            font-size: 20px
+            display: flex
+            align-items: center
+            font-family: $primary-font
+        >div.ver_token
+          text-align: center
+          padding-bottom: 10px
+          >p.title
+            color: #fff
+            margin: 0
+            padding: 10px 0
+            font-family: $primary-font
+          >p.number
+            margin: 10px 0 0
+            padding: 0 20px 10px
+            font-weight: bolder
+            text-shadow: none
+            font-size: 25px
+            color: #fff
+            font-family: $primary-font
+          >div
+            margin-bottom: 10px
+            height: 75px
+            display: flex
+            align-items: center
+            justify-content: center
+            >img
+              max-width: 50%
+              max-height: 75px
+              filter: drop-shadow(0px 0px 1px #eee)
+        >div.reciept
+          background: #fff
+          padding: 10px
+          margin: 0 auto
+          margin-bottom: 25px
+          width: calc(100% - 20px)
+          border-radius: 5px
+          >p.title
+            color: #151515
+            margin: 0
+            font-family: $primary-font
+            font-size: 15px
+            text-align: center
+            >#refca
+              color: #151515
+          >div
+            display: flex
+            flex-direction: column
+            padding: 5px 10px
+            >p
+              color: #151515
+              margin: 0
+              display: flex
+              align-items: center
+              font-family: $primary-font
+              font-size: 15px
+            >p.name
+              width: 100%
+              >span.tx_name
+                color: #000
+                margin: 0 5px
+            >p.reciept_desc
+              font-size: 12px
+            >p.nominal
+              width: 100%
+              font-weight: bolder
+              >span
+                color: #000
+                margin-left: 10px
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          font-weight: bolder
+          letter-spacing: 2px
+          border: none
+          border-radius: 3px
+          margin: 5px
+
+main#index_pascabayar
+  padding: 60px 0 0
+  background: $main-background-color
+  height: 100%
+  >form
+    height: 100%
+    position: relative
+    >div.phase
+      padding: 0 10px
+      height: 100%
+      position: absolute
+      top: 0
+      display: flex
+      flex-direction: column
+      width: 100%
+      transition: 300ms
+    >div.phase_1
+      left: 0
+      >div
+        height: calc(100% - 60px)
+        overflow: auto
+        padding-bottom: 10px
+        >div.first-field
+          display: flex
+          flex-direction: column
+          justify-content: center
+          >p
+            font-family: $primary-font
+            font-weight: bolder
+            color: #fff
+            margin: 20px 0 10px
+          >input
+            background: transparent
+            padding: 10px 0
+            border: none
+            border-bottom: 1px solid #fff
+            outline: none
+            margin-bottom: 10px
+            font-family: $primary-font
+            font-size: 22px
+            color: #fff
+          >div.telkom
+            display: flex
+            >input.area
+              background: transparent
+              margin-right: 10px
+              width: 25%
+              padding: 10px 0
+              border: none
+              border-bottom: 1px solid #fff
+              color: #fff
+              outline: none
+              margin-bottom: 10px
+              font-family: $primary-font
+              font-size: 22px
+              text-align: center
+            >input.phone
+              background: transparent
+              width: 75%
+              padding: 10px 0
+              border: none
+              border-bottom: 1px solid #fff
+              color: #fff
+              outline: none
+              margin-bottom: 10px
+              font-family: $primary-font
+              font-size: 22px
+          >select, p.type
+            background: transparent
+            text-align: center
+            border: 1px solid #fff
+            color: #fff
+            border-radius: 0
+            display: flex
+            padding: 10px
+            outline: none
+            margin-bottom: 10px
+            font-family: $primary-font
+            font-size: 22px
+            justify-content: center
+            height: 50px
+          >div
+            margin-bottom: 10px
+            height: 75px
+            display: flex
+            align-items: center
+            justify-content: center
+            &.pulsa_prabayar
+              display: none
+            >img
+              max-width: 50%
+              max-height: 75px
+              filter: drop-shadow(0px 0px 1px #eee)
+      >div.phone_code_div
+        position: fixed
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        z-index: 12
+        display: none
+        justify-content: center
+        align-items: center
+        >div
+          background: $main-background-color
+          width: 85%
+          padding: 10px
+          border-radius: 3px
+          >input
+            width: 100%
+            padding: 10px 0
+            font-size: 20px
+            background: transparent
+            border: none
+            color: #fff
+            border-bottom: 1px solid #ffff
+            outline: none
+            text-align: center
+          >div#phone_code_list
+            display: flex
+            flex-direction: column
+            max-height: 200px
+            overflow: auto
+            margin: 15px 0
+            >input[name='phone_area_select']
+              display: none
+            >input[name='phone_area_select'] + label
+              margin: 5px 0
+              padding: 15px 5px
+              text-align: center
+              transition: 200ms
+              min-height: 125px
+              max-height: 125px
+              display: flex
+              justify-content: center
+              align-items: center
+              flex-direction: column
+              background: #fff
+              >p
+                margin: 0 auto
+                color: #151515
+                &.code_id
+                  width: 75%
+                  border-bottom: 1px solid #ffff
+            >input[name='phone_area_select']:checked + label
+              color: #fff
+              border-top: 10px solid $primary-color
+              border-bottom: 10px solid $primary-color
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          transition: 300ms
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          letter-spacing: 2px
+          font-weight: bolder
+          border: none
+          border-radius: 3px
+          margin: 5px
+    >div.phase_2
+      left: 100%
+      >div
+        height: calc(100% - 60px)
+        overflow: auto
+        padding-bottom: 10px
+        >p.header
+          padding-top: 10px
+          font-family: $primary-font
+          font-size: 17.5px
+          color: #fff
+          text-align: center
+          >span
+            color: #fff
+        >p.number
+          margin: 0
+          font-family: $primary-font
+          font-size: 27.5px
+          text-align: center
+          color: #fff
+        >div.value
+          display: flex
+          flex-direction: column
+          >div.logo
+            margin: 10px 0
+            padding-bottom: 10px
+            height: 75px
+            display: flex
+            align-items: center
+            justify-content: center
+            >img
+              max-width: 50%
+              max-height: 75px
+              filter: drop-shadow(0px 0px 1px #eee)
+          >div.profile
+            padding: 0
+            display: flex
+            flex-direction: column
+            position: relative
+            >div#pro_loader
+              position: absolute
+              width: 100%
+              >img
+                margin: 0 auto
+                display: block
+                max-width: 50px
+            >div.profile_inquiry
+              background: #fff
+              padding: 10px
+              width: calc(100% - 20px)
+              margin: auto
+              margin-bottom: 20px
+              border-radius: 5px
+              >p.title
+                color: #1f1f1f
+                border-bottom: 1px solid
+                padding-bottom: 5px
+              >p.detail
+                color: #151515
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          transition: 300ms
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          font-weight: bolder
+          letter-spacing: 2px
+          border: none
+          border-radius: 3px
+          margin: 5px
+    >div.phase_3
+      left: 200%
+      >div
+        height: calc(100% - 60px)
+        overflow: auto
+        padding-bottom: 10px
+        >div.header
+          padding: 10px 5px 0
+          display: flex
+          margin-bottom: 10px
+          justify-content: center
+          >p
+            margin: 0
+            font-weight: normal
+            text-shadow: none
+            font-size: 20px
+            display: flex
+            align-items: center
+            font-family: $primary-font
+        >div.ver_token
+          text-align: center
+          padding-bottom: 10px
+          >p.title
+            color: #fff
+            margin: 0
+            padding: 10px 0
+            font-family: $primary-font
+          >p.number
+            margin: 10px 0 0
+            padding: 0 20px 10px
+            font-weight: bolder
+            text-shadow: none
+            font-size: 25px
+            color: #fff
+            font-family: $primary-font
+          >div
+            margin-bottom: 10px
+            height: 75px
+            display: flex
+            align-items: center
+            justify-content: center
+            >img
+              max-width: 50%
+              max-height: 75px
+              filter: drop-shadow(0px 0px 1px #eee)
+        >div.reciept
+          background: #fff
+          padding: 10px
+          margin: 0 auto
+          margin-bottom: 25px
+          width: calc(100% - 20px)
+          border-radius: 5px
+          >p.title
+            color: #151515
+            margin: 0
+            font-family: $primary-font
+            font-size: 15px
+            text-align: center
+            >#refca
+              color: #151515
+          >div
+            display: flex
+            flex-direction: column
+            padding: 5px 10px
+            >p
+              color: #151515
+              margin: 0
+              display: flex
+              align-items: center
+              font-family: $primary-font
+              font-size: 15px
+            >p.name
+              width: 100%
+              >span.tx_name
+                color: #000
+                margin: 0 5px
+            >p.reciept_desc
+              font-size: 12px
+            >p.nominal
+              width: 100%
+              font-weight: bolder
+              >span
+                color: #000
+                margin-left: 10px
+      >div.next_button
+        overflow: hidden
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        padding: 10px
+        background: $main-background-color
+        box-shadow: 0 0 6px 0
+        >button
+          width: 100%
+          padding: 10px
+          background: lighten($primary-color, 10%)
+          color: #fff
+          font-family: $primary-font
+          font-weight: bolder
+          letter-spacing: 2px
+          border: none
+          border-radius: 3px
+          margin: 5px
+
+main#discount_index
+  padding-top: 60px
+  padding-bottom: 60px
+  >a
+    width: 100%
+    display: flex
+    flex-direction: column
+    min-height: 200px
+    margin-bottom: 10px
+    >div.header
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
+      display: block
+      height: 125px
+      width: 100%
+    >div.title
+      padding: 10px
+      background: #fff
+      display: block
+      height: 75px
+      width: 100%
+      position: relative
+      >p.header
+        font-weight: bolder
+        color: #151515
+        margin-bottom: 5px
+        font-size: 12px
+      >p.expire
+        position: absolute
+        left: 10px
+        bottom: 10px
+        color: #b0b0b0
+        font-size: 11px
+        margin-bottom: 0
+
+
+main#discount_page
+  padding: 60px 0
+  background: #fff
+  height: auto
+  >div.header
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    display: block
+    height: 150px
+    width: 100%
+  >div.title
+    padding: 10px
+    background: #fff
+    >p.company
+      margin: 0
+      font-size: 13px
+      font-weight: bolder
+      color: #151515
+    >p.expire
+      margin: 0
+      font-size: 12px
+    >p.name
+      margin: 0
+      color: #151515
+      font-size: 12px
+    >a
+      display: block
+      width: 150px
+      border-radius: 5px
+      border: none
+      background: $primary-color
+      color: #fff
+      text-shadow: none
+      font-weight: lighter
+      padding: 10px
+      text-align: center
+  >div.short_desc
+    padding: 0 10px 10px
+    >p
+      color: #151515
+      margin: 0
+      font-size: 12px
+  >div.explain
+    padding: 0 10px 10px
+    >div.header
+      border-bottom: 1px solid #fff
+      font-size: 12px
+      font-weight: bolder
+      color: #000
+    >div.title
+      >ul
+        -webkit-padding-start: 20px
+  >div.redeem
+    height: 60px
+    position: fixed
+    bottom: 0
+    left: 0
+    padding: 10px
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    border-top: 1px solid #959595
+    background: #fff
+    >button.redeem_button
+      background: $main-background-color
+      width: 90%
+      padding: 10px
+      color: #fff
+
+main#ecommerce_index
+  padding: 60px 10px
+  display: flex
+  flex-wrap: wrap
+  >a
+    width: 48%
+    display: flex
+    flex-direction: column
+    min-height: 200px
+    margin: 10px 1%
+    >div.header
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
+      display: block
+      height: 175px
+      width: 100%
+    >div.title
+      padding: 10px
+      background: #fff
+      display: block
+      height: 50px
+      width: 100%
+      >button
+        width: 150px
+        border-radius: 5px
+        border: none
+        background: $main-background-color
+        color: #fff
+        text-shadow: none
+        font-weight: lighter
+
+main#ecommerce_page
+  >div.header
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    display: block
+    height: 200px
+    width: 100%
+  >div.title
+    padding: 10px
+    background: #fff
+    >p.company
+      margin: 0
+      font-size: 12px
+    >p.expire
+      font-size: 12px
+      margin-bottom: 5px
+    >p.name
+      font-weight: bolder
+      color: #000
+      font-size: 20px
+    >a
+      display: block
+      width: 150px
+      border-radius: 5px
+      border: none
+      background: $primary-color
+      color: #fff
+      text-shadow: none
+      font-weight: lighter
+      padding: 10px
+      text-align: center
+  >div.explain
+    >div.header
+      padding: 10px
+      border-bottom: 1px solid #fff
+      font-size: 20px
+      font-weight: bolder
+      color: #000
+    >div.title
+      padding: 10px
+
+main#history_index
+  padding: 180px 10px 0
+  background: $main-background-color
+  padding-left: calc(20% + 10px)
+  >div#pro_loader
+    position: absolute
+    z-index: 1
+    width: 100%
+    >img
+      margin: 0 auto
+      display: block
+      max-width: 50px
+  >div.saldo_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 60px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    padding: 10px
+    display: flex
+    >div
+      width: 33.33%
+      padding: 0 10px
+      >p
+        font-family: $primary-font
+        font-size: 10px
+        border-bottom: 1px solid #eee
+        margin: 0
+      >h1
+        margin: 0
+        margin-top: 5px
+        font-size: 15px
+        font-family: $primary-font
+        position: relative
+        >a
+          cursor: pointer
+          position: absolute
+          right: 10px
+          color: #151515
+          &:hover
+            color: #000
+  >div.filter_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 120px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    box-shadow: 1px 7px 5px -4px
+    padding: 10px
+    >input
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+    >select
+      background: transparent
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+  >#body
+    >a
+      position: relative
+      background: #fff
+      width: 100%
+      display: flex
+      flex-direction: column
+      margin: 10px 0 20px
+      padding: 15px
+      border-top: 10px solid $primary-color
+      >div.header
+        margin-bottom: 10px
+        >p
+          margin: 0
+          font-family: $primary-font
+          &.buy_id
+            color: $primary-color
+            font-weight: bolder
+          &.date
+            font-size: 12px
+            color: #999
+      >div.body
+        >p
+          margin: 0
+          color: #151515
+          &.type
+            font-size: 11px
+            font-weight: bolder
+          &.name, .value
+            font-size: 14px
+          &.nohp
+            font-size: 12px
+      >p.status
+        font-family: $primary-font
+        position: absolute
+        top: 10px
+        right: 10px
+        font-weight: bolder
+        font-size: 13px
+        margin: 0
+
+main#history_read
+  background: $main-background-color
+  padding: 60px 0 0
+  >div.body
+    margin: 0 auto
+    width: calc(100% - 20px)
+    padding: 10px
+    margin: 10px 10px 20px
+    background: $secondary-background-color
+    border-radius: 1px
+    >p
+      font-family: $primary-font
+      padding: 0 5px
+    >p.title
+      color: $primary-color
+      text-transform: uppercase
+      font-size: 11px
+      letter-spacing: 1px
+      width: 100%
+      border-bottom: 2px solid $primary-color
+      margin-bottom: 2px
+    >p.detail
+      font-size: 15px
+
+main#user_saldo_index
+  padding: 180px 10px 0
+  background: $main-background-color
+  padding-left: calc(20% + 10px)
+  >div#pro_loader
+    position: absolute
+    z-index: 1
+    width: 100%
+    >img
+      margin: 0 auto
+      display: block
+      max-width: 50px
+  >div.saldo_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 60px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    padding: 10px
+    display: flex
+    box-shadow: 0 0 5px 2px
+    >div
+      width: 33.33%
+      padding: 0 10px
+      >p
+        font-family: $primary-font
+        font-size: 10px
+        border-bottom: 1px solid #eee
+        margin: 0
+      >h1
+        margin: 0
+        margin-top: 5px
+        font-size: 15px
+        font-family: $primary-font
+        position: relative
+        >a
+          cursor: pointer
+          position: absolute
+          right: 10px
+          color: #151515
+          &:hover
+            color: #000
+  >div.filter_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 120px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    box-shadow: 1px 7px 5px -4px
+    padding: 10px
+    >input
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+    >select
+      background: transparent
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+  >#body
+    >a
+      position: relative
+      background: #fff
+      width: 100%
+      display: flex
+      flex-direction: column
+      margin: 10px 0 20px
+      padding: 15px
+      border-top: 10px solid $primary-color
+      >div.header
+        margin-bottom: 10px
+        >p
+          margin: 0
+          font-family: $primary-font
+          &.buy_id
+            color: $primary-color
+            font-weight: bolder
+          &.date
+            font-size: 12px
+            color: #999
+      >div.body
+        >img.provider_logo
+          max-width: 100px
+          margin-bottom: 10px
+        >p
+          margin: 0
+          color: #151515
+          &.type
+            font-size: 11px
+            font-weight: bolder
+          &.name, .value
+            font-size: 14px
+          &.nohp
+            font-size: 12px
+      >p.status
+        font-family: $primary-font
+        position: absolute
+        top: 10px
+        right: 10px
+        font-weight: bolder
+        font-size: 13px
+        margin: 0
+
+main#user_saldo_verification
+  padding: 120px 10px 0
+  background: $main-background-color
+  padding-left: calc(20% + 10px)
+  >div#pro_loader
+    position: absolute
+    z-index: 1
+    width: 100%
+    >img
+      margin: 0 auto
+      display: block
+      max-width: 50px
+  >div.saldo_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 60px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    padding: 10px
+    display: flex
+    box-shadow: 0 0 5px 2px
+    >div
+      width: 33.33%
+      padding: 0 10px
+      >p
+        font-family: $primary-font
+        font-size: 10px
+        border-bottom: 1px solid #eee
+        margin: 0
+      >h1
+        margin: 0
+        margin-top: 5px
+        font-size: 15px
+        font-family: $primary-font
+        position: relative
+        >a
+          cursor: pointer
+          position: absolute
+          right: 10px
+          color: #151515
+          &:hover
+            color: #000
+  >div.filter_nav
+    position: fixed
+    width: 80%
+    height: 60px
+    top: 120px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    box-shadow: 1px 7px 5px -4px
+    padding: 10px
+    >input
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+    >select
+      background: transparent
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+  >div.ver_body
+    background: #fff
+    border-radius: 2px
+    margin-top: 10px
+    padding: 15px
+    >p.title
+      border-bottom: 1px solid #eee
+      padding-left: 5px
+      font-family: $primary-font
+      margin-bottom: 0
+      color: #000
+    >p.detail
+      padding-left: 5px
+      font-family: $primary-font
+    >div
+      display: flex
+      justify-content: center
+      >button
+        border-radius: 1px
+        height: 50px
+        padding: 0 50px
+        color: #fff
+        font-family: $primary-font
+        letter-spacing: 2px
+        margin: 0 10px
+        &#before_ver
+          background: $primary-color
+        &#before_failed
+          background: darkred
+  >div.ver-box, div.gagal-box
+    display: none
+    position: fixed
+    z-index: 12
+    height: 100%
+    width: 100%
+    top: 0
+    left: 0
+    justify-content: center
+    align-items: center
+    >div
+      width: 40%
+      height: 50%
+      background: $secondary-background-color
+      border: 1px solid transparent
+      border-radius: 3px
+      padding: 15px
+      position: relative
+      display: flex
+      flex-direction: column
+      >h1
+        border-bottom: 1px solid $primary-color
+        margin: 0
+        text-align: center
+        color: $primary-color
+        font-family: $primary-font
+        font-size: 25px
+        padding: 10px
+      >form
+        display: flex
+        justify-content: center
+        align-items: center
+        align-items: center
+        width: 100%
+        height: calc(100% - 85px)
+        flex-direction: column
+        overflow: auto
+        >div.info
+          width: 100%
+          display: flex
+          flex-direction: column
+          align-items: center
+          margin-top: 10px
+          >h1
+            font-size: 15px
+            font-family: $primary-font
+            color: $primary-color
+            width: 100%
+            text-align: center
+          >input[type='text'], select
+            border: none
+            border-bottom: 1px solid #ffff
+            color: $primary-color
+            font-family: $primary-font
+            text-align: left
+            width: 70%
+            outline: none
+            background: transparent
+            margin: 0 0 5px
+            font-size: 15px
+            font-weight: lighter
+            padding: 10px
+            &#provider
+              margin: 10px 0
+          >input[type='password']
+            border: none
+            outline: none
+            background: transparent
+            border-bottom: 1px solid #151515
+            width: 75%
+            padding: 10px
+            font-size: 20px
+            text-align: center
+          >div
+            width: 70%
+            height: 40px
+            display: flex
+            border: 1px solid $primary-color
+            margin-top: 10px
+            >input[type=radio][name=product_status]
+              display: none
+            >input[type=radio][name=product_status] + label
+              width: 50%
+              display: flex
+              justify-content: center
+              align-items: center
+              color: $primary-color
+              margin: 0
+              transition: 300ms
+              font-family: $primary-font
+            >input[type=radio][name=product_status]:checked + label,
+            input[type=radio][name=product_status]:hover + label
+              background: $primary-color
+              color: #fff
+          >p
+            width: 75%
+            font-size: 20px
+            color: $primary-color
+            font-family: $primary-font
+            margin-bottom: 20px
+            text-align: center
+        >div.button
+          display: flex
+          position: absolute
+          bottom: 10px
+          width: 100%
+          >a#close
+            cursor: pointer
+            width: 50%
+            margin: 0 5px
+            display: flex
+            justify-content: center
+            align-items: center
+            height: 40px
+            background: #8b1000
+            color: #fff
+            border-radius: 3px
+            font-family: $primary-font
+            letter-spacing: 4px
+          >button
+            cursor: pointer
+            width: 50%
+            height: 40px
+            margin: 0 5px
+            background: $primary-color
+            border: none
+            outline: none
+            border-radius: 3px
+            color: #fff
+            font-family: $primary-font
+            letter-spacing: 4px
+
+
+
+main#user_index
+  padding: 130px 10px 0
+  background: $main-background-color
+  padding-left: calc(20% + 10px)
+  >div#pro_loader
+    position: absolute
+    z-index: 1
+    width: 100%
+    >img
+      margin: 0 auto
+      display: block
+      max-width: 50px
+  >div.filter_nav
+    position: fixed
+    width: 100%
+    height: 60px
+    top: 60px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    box-shadow: 0 0 3px 2px
+    padding: 10px
+    >input
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+    >select
+      background: transparent
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+  >table#customers
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif
+    border-collapse: collapse
+    width: 100%
+    tr:nth-child(even)
+      background-color: #fff
+    tr:nth-child(odd)
+      background-color: #f2f2f2
+    tr:hover
+      background-color: #ddd
+    td, th
+      border: 1px solid #ddd
+      padding: 8px
+      color: $primary-color
+    th
+      padding-top: 12px
+      padding-bottom: 12px
+      text-align: left
+      background-color: $primary-color
+      color: white
+    td > a
+      background: $primary-color
+      width: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      color: #fff
+      border-radius: 2px
+      padding: 5px
+
+main#user_page
+  padding: 70px 10px 0
+  background: $main-background-color
+  padding-left: calc(20% + 10px)
+  >div.body
+    display: flex
+    >div
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      width: 32.33%
+      margin: 0.5%
+      padding: 10px
+      background: $secondary-background-color
+      border-radius: 2px
+      &.profile
+        width: 25%
+        max-height: 300px
+        >h1
+          font-family: $primary-font
+          font-size: 20px
+          text-align: center
+        >div.profile-picture
+          width: 75px
+          height: 75px
+          border-radius: 100%
+          background-image: url(/static/src/fav.png)
+          background-color: transparent
+          background-position: center
+          background-size: cover
+        >div.detail
+          padding: 10px
+          >p
+            font-family: $primary-font
+            margin-bottom: 5px
+            font-size: 12.5px
+            >i
+              color: $primary-color
+              margin-right: 10px
+      &.transaction
+        display: block
+        width: 75%
+        position: relative
+        padding-top: 50px
+        >h1
+          position: absolute
+          top: 0
+          left: 0
+          margin: 0
+          width: 100%
+          text-align: center
+          font-family: Moon
+          font-size: 24px
+          height: 40px
+          display: flex
+          justify-content: center
+          align-items: center
+          background: $primary-color
+          color: #fff
+        >table#transaction
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif
+          border-collapse: collapse
+          width: 100%
+          tr:nth-child(even)
+            background-color: #fff
+          tr:nth-child(odd)
+            background-color: #f2f2f2
+          tr:hover
+            background-color: #ddd
+          td, th
+            border: 1px solid #ddd
+            padding: 8px
+            color: $primary-color
+          th
+            padding-top: 12px
+            padding-bottom: 12px
+            text-align: left
+            background-color: #4CAF50
+            color: white
+          td > a
+            background: $primary-color
+            width: 100%
+            display: flex
+            justify-content: center
+            align-items: center
+            color: #fff
+            border-radius: 2px
+            padding: 5px
+        >a
+          background: $primary-color
+          height: 40px
+          display: flex
+          justify-content: center
+          align-items: center
+          font-family: $primary-font
+          color: $secondary-background-color
+          margin-top: 10px
+  >div#pro_loader
+    position: absolute
+    z-index: 1
+    width: 100%
+    >img
+      margin: 0 auto
+      display: block
+      max-width: 50px
+
+//main#history_page
+//  >div.header
+//    background-position: center
+//    background-repeat: no-repeat
+//    background-size: cover
+//    display: block
+//    height: 200px
+//    width: 100%
+//  >div.title
+//    padding: 10px
+//    background: #fff
+//    >p.company
+//      margin: 0
+//      font-size: 12px
+//    >p.expire
+//      font-size: 12px
+//      margin-bottom: 5px
+//    >p.name
+//      font-weight: bolder
+//      color: #000
+//      font-size: 20px
+//    >a
+//      display: block
+//      width: 150px
+//      border-radius: 5px
+//      border: none
+//      background: $primary-color
+//      color: #fff
+//      text-shadow: none
+//      font-weight: lighter
+//      padding: 10px
+//      text-align: center
+//  >div.explain
+//    >div.header
+//      padding: 10px
+//      border-bottom: 1px solid #fff
+//      font-size: 20px
+//      font-weight: bolder
+//      color: #000
+//    >div.title
+//      padding: 10px
+
+main#dashboard_index
+  padding: 60px 0
+  background: $main-background-color
+  >div.saldo
+    margin: 0 auto
+    margin: 10px 10px 20px
+    background: $secondary-background-color
+    border-radius: 1px
+    padding: 10px
+    width: calc(100% - 20px)
+    >p.title
+      color: $primary-color
+      font-family: $primary-font
+      border-bottom: 1px solid
+    >div
+      position: relative
+      >p.nominal
+        color: $primary-color
+        font-size: 20px
+      >a.aTopup
+        position: absolute
+        right: 0
+        bottom: -2.5px
+        color: #fff
+        background: $primary-color
+        padding: 5px 10px
+  >div.transaction
+    margin: 0 auto
+    margin: 10px 10px 20px
+    background: $secondary-background-color
+    border-radius: 1px
+    padding: 10px
+    width: calc(100% - 20px)
+    >p.title
+      color: $primary-color
+      font-family: $primary-font
+      border-bottom: 1px solid $primary-color
+      letter-spacing: 1px
+    >div.detail
+      display: flex
+      flex-direction: column
+      position: relative
+      height: 135px
+      h5
+        font-family: $primary-font
+        color: $primary-color
+        font-weight: bolder
+        margin: 0
+        text-transform: uppercase
+        letter-spacing: 2px
+      p
+        margin: 0
+        margin-bottom: 5px
+        position: relative
+        font-family: $primary-font
+        color: $primary-color
+        font-size: 12px
+        >span
+          font-family: $primary-font
+          color: $primary-color
+          right: 0
+          font-weight: bolder
+          position: absolute
+          font-size: 12px
+      >div
+        >p.timescale
+          padding-left: 15px
+          border-bottom: 1px solid $primary-color
+          font-family: $primary-font
+      >a
+        display: flex
+        justify-content: center
+        align-items: center
+        background: $primary-color
+        position: absolute
+        bottom: 10px
+        color: #fff
+        height: 40px
+        width: 100%
+  >div.price
+    margin: 0 auto
+    margin: 10px 10px 20px
+    background: $secondary-background-color
+    border-radius: 1px
+    padding: 10px
+    width: calc(100% - 20px)
+    >p.title
+      font-family: $primary-font
+      color: $primary-color
+      border-bottom: 1px solid #fff
+      letter-spacing: 1px
+    >div.detail
+      >div
+        display: flex
+        height: 40px
+        align-items: center
+        position: relative
+        >p
+          font-family: $primary-font
+          color: $primary-color
+        >a
+          position: absolute
+          bottom: 7.5px
+          right: 0
+          background: $primary-color
+          font-family: $primary-font
+          color: #fff
+          height: 30px
+          display: flex
+          justify-content: center
+          align-items: center
+          width: 70px
+  >div.history
+    margin: 0 auto
+    margin: 10px 10px 20px
+    background: $secondary-background-color
+    border-radius: 1px
+    padding: 10px
+    width: calc(100% - 20px)
+    position: relative
+    height: 54px
+    display: flex
+    align-items: center
+    >p.title
+      margin: 0
+      font-family: $primary-font
+      color: $primary-color
+    >a
+      position: absolute
+      right: 10px
+      bottom: 10px
+      display: flex
+      height: 30px
+      background: $primary-color
+      font-family: $primary-font
+      color: #fff
+      width: 70px
+      justify-content: center
+      align-items: center
+
+main#dashboard_price_index
+  padding: 60px 10px
+  padding-left: calc(20% + 10px)
+  background: $main-background-color
+  width: 100%
+  height: 100%
+  >div.title
+    color: lighten($primary-color, 35%)
+    padding-left: 5px
+    text-transform: uppercase
+    font-size: 11px
+    letter-spacing: 1px
+  >div.option
+    margin-bottom: 10px
+    >h1
+      font-family: $primary-font
+      color: #fff
+      text-align: center
+      background: $primary-color
+      margin-bottom: 0
+    >div
+      display: flex
+      flex-wrap: wrap
+      padding: 0
+      border: 1px solid $primary-color
+      background: #fff
+      >a
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        width: 24.5%
+        padding: 10px 5px
+        margin: 2.5px
+        >img
+          max-width: 50px
+          max-height: 50px
+        >p
+          margin: 10px 0 0
+          text-align: center
+          font-weight: lighter
+          font-size: 10px
+          display: flex
+          height: 30px
+          align-items: center
+          font-family: $primary-font
+          color: #000
+
+main#dashboard_price_edit
+  background: $main-background-color
+  padding-top: 130px
+  padding-right: 10px
+  padding-bottom: 10px
+  padding-left: calc(20% + 10px)
+  width: 100%
+  min-height: 100%
+  >div.filter_nav
+    position: fixed
+    width: 100%
+    height: 60px
+    top: 60px
+    background: #fff
+    margin-left: -10px
+    z-index: 2
+    box-shadow: 0 0 3px 2px
+    padding: 10px
+    >input
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+    >select
+      background: transparent
+      width: 300px
+      height: 100%
+      outline: none
+      border: none
+      border-bottom: 1px solid #151515
+  >div#price_list
+    display: flex
+    justify-content: center
+    >table
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif
+      border-collapse: collapse
+      width: 100%
+    tr:nth-child(even)
+      background-color: #fff
+    tr:nth-child(odd)
+      background-color: #f2f2f2
+    tr:hover
+      background-color: #ddd
+    td, th
+      border: 1px solid #ddd
+      padding: 8px
+      color: $primary-color
+    th
+      padding-top: 12px
+      padding-bottom: 12px
+      text-align: left
+      background-color: $primary-color
+      color: white
+    td > a
+      background: $primary-color
+      width: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      color: #fff
+      border-radius: 2px
+      padding: 5px
+  >div.edit-box
+    display: none
+    position: fixed
+    z-index: 12
+    height: 100%
+    width: 100%
+    top: 0
+    left: 0
+    justify-content: center
+    align-items: center
+    >div
+      width: 50%
+      height: 80%
+      background: $secondary-background-color
+      border: 1px solid transparent
+      border-radius: 3px
+      padding: 10px
+      position: relative
+      display: flex
+      justify-content: center
+      flex-direction: column
+      >h1
+        border-bottom: 1px solid $primary-color
+        margin: 0
+        text-align: center
+        color: $primary-color
+        font-family: $primary-font
+        font-size: 25px
+      >form
+        display: flex
+        align-items: center
+        width: 100%
+        height: calc(100% - 50px)
+        flex-direction: column
+        overflow: auto
+        >div.info
+          width: 100%
+          display: flex
+          flex-direction: column
+          align-items: center
+          margin-top: 10px
+          >h1
+            font-size: 15px
+            font-family: $primary-font
+            color: $primary-color
+            width: 100%
+            text-align: center
+          >input[type='text'], select
+            border: none
+            border-bottom: 1px solid #ffff
+            color: $primary-color
+            font-family: $primary-font
+            text-align: left
+            width: 70%
+            outline: none
+            background: transparent
+            margin: 0 0 5px
+            font-size: 15px
+            font-weight: lighter
+            padding: 10px
+            &#provider
+              margin: 10px 0
+          >div
+            width: 70%
+            height: 40px
+            display: flex
+            border: 1px solid $primary-color
+            margin-top: 10px
+            >input[type=radio][name=product_status]
+              display: none
+            >input[type=radio][name=product_status] + label
+              width: 50%
+              display: flex
+              justify-content: center
+              align-items: center
+              color: $primary-color
+              margin: 0
+              transition: 300ms
+              font-family: $primary-font
+            >input[type=radio][name=product_status]:checked + label,
+            input[type=radio][name=product_status]:hover + label
+              background: $primary-color
+              color: #fff
+          >p
+            width: 70%
+            font-size: 12px
+            color: $primary-color
+            font-family: $primary-font
+            margin: 0
+            &.kubos_price
+              margin-top: 10px
+              background: $primary-color
+              text-align: center
+              padding: 5px
+              color: #fff
+            >span
+              color: #fff
+              font-family: $primary-font
+              font-weight: bolder
+              font-size: 20px
+        >div.button
+          display: flex
+          position: absolute
+          bottom: 10px
+          width: 100%
+          >a#close
+            width: 50%
+            margin: 0 5px
+            display: flex
+            justify-content: center
+            align-items: center
+            height: 40px
+            background: #8b1000
+            color: #fff
+            border-radius: 3px
+            font-family: $primary-font
+            letter-spacing: 4px
+          >button
+            width: 50%
+            height: 40px
+            margin: 0 5px
+            background: $primary-color
+            border: none
+            outline: none
+            border-radius: 3px
+            color: #fff
+            font-family: $primary-font
+            letter-spacing: 4px
+
+main#topup_index
+  background: $main-background-color
+  padding: 60px 0
+  overflow: auto
+  >div.body
+    margin: 0 auto
+    width: calc(100% - 20px)
+    padding: 10px
+    margin: 10px
+    background: $secondary-background-color
+    border-radius: 1px
+    >p
+      font-family: $primary-font
+      padding: 0 5px
+    >p.title
+      color: $primary-color
+      text-transform: uppercase
+      font-size: 11px
+      letter-spacing: 1px
+      width: 100%
+      border-bottom: 2px solid $primary-color
+      margin-bottom: 2px
+    >a
+      position: relative
+      display: flex
+      align-items: center
+      >div
+        max-width: 50px
+        max-height: 50px
+        min-height: 50px
+        display: flex
+        align-items: center
+        >img
+          height: 100%
+          width: 100%
+      >p
+        margin: 0
+        margin-left: 10px
+        font-family: $primary-font
+    >div.exp
+      border-bottom: 1px solid #a0a0a0
+      position: relative
+      height: 0
+      display: block
+      overflow: auto
+      transition: 300ms
+      font-family: $primary-font
+      font-size: 12px
+      padding-left: 5px
+      >ol
+        padding: 0
+        padding-left: 15px
+        margin: 0
+        >li
+          font-family: $primary-font
+          >span
+            font-family: $primary-font
+            font-size: 16px
+      >a.topup_btn
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 40px
+        margin: 5px 0
+        background: $primary-color
+        color: #fff
+        border-radius: 3px
+  >div.topup_box
+    width: 100%
+    height: 100%
+    display: none
+    z-index: 11
+    justify-content: center
+    align-items: center
+    position: fixed
+    top: 0
+    left: 0
+    >div
+      background: #fff
+      width: 85%
+      border-radius: 2px
+      >h1
+        margin: 0
+        padding: 5px
+        font-size: 16px
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 40px
+        background: $primary-color
+        color: #fff
+        font-family: $primary-font
+      >form
+        padding: 10px
+        >input
+          border: none
+          width: 100%
+          border-bottom: 1px solid #c0c0c0
+          height: 40px
+          text-align: center
+          outline: none
+          font-family: $primary-font
+          margin-bottom: 10px
+        >div.via
+          display: flex
+          flex-direction: column
+          align-items: center
+          justify-content: center
+          margin-bottom: 10px
+          >p
+            margin-bottom: 5px
+          >div
+            max-width: 100px
+            max-height: 50px
+            >img
+              max-width: 100%
+        >div
+          display: flex
+          >button
+            padding: 0
+            width: 100%
+            height: 40px
+            border-radius: 2.5px
+            background: #7fc9ff
+            color: #fff
+            font-family: $primary-font
+            margin: 0 2px
+            &#close
+              background: darkred
+  >div.main_footer
+    >a
+      width: 95%
+      height: 40px
+      background: #7fc9ff
+      color: #fff
+      font-family: $primary-font
+      font-size: 16px
+
+main#topup_verification
+  background: $main-background-color
+  padding: 60px 0
+  overflow: auto
+  >form
+    >div.body
+      margin: 0 auto
+      width: calc(100% - 20px)
+      padding: 10px
+      margin: 10px
+      border-radius: 1px
+      >p
+        font-family: $primary-font
+        padding: 0 5px
+      >p.title
+        color: $secondary-background-color
+        text-transform: uppercase
+        font-size: 11px
+        letter-spacing: 1px
+        width: 100%
+        margin-bottom: 2px
+      >input[type="text"]
+        color: $secondary-background-color
+        margin: 5px 0 10px
+        width: 100%
+        height: 40px
+        background: transparent
+        border: none
+        border-bottom: 1px solid #c0c0c0
+        font-family: $primary-font
+        outline: none
+        padding: 0 5px
+      &.keterangan
+        background: #fff
+        >h1
+          margin: 0
+          font-family: $primary-font
+          font-size: 20px
+          text-align: center
+          border-bottom: 1px solid #c0c0c0
+          padding-bottom: 5px
+          margin-bottom: 5px
+        >div
+          >p
+            font-family: $primary-font
+            margin: 0
+            &.detail
+              margin-bottom: 10px
+          >div
+            max-width: 100px
+            max-height: 50px
+            >img
+              max-width: 100%
+    >div.main_footer
+      >button
+        width: 95%
+        height: 40px
+        background: #7fc9ff
+        color: #fff
+        font-family: $primary-font
+        font-size: 16px
+        border: none
+        transition: 200ms
+
+main#pengaturan_index
+  padding: 70px 10px 0
+  padding-left: calc(20% + 10px)
+  >div.header_option
+    position: fixed
+    top: 60px
+    width: 100%
+    left: 0
+    height: 50px
+    background: $secondary-background-color
+    display: flex
+    box-shadow: 0 0 5px 1px
+    z-index: 1
+    >a
+      width: 50%
+      display: flex
+      justify-content: center
+      align-items: center
+      color: #aaa
+      font-weight: bolder
+      font-size: 15px
+      letter-spacing: 2px
+      font-family: $primary-font
+  >div.profile
+    padding: 20px 15px
+    display: flex
+    flex-direction: column
+    margin: 12.5px
+    border-radius: 3px
+    background: $secondary-background-color
+    &.profile_1
+      margin-top: 12.5px
+      >p.title
+        color: $primary-color
+        font-family: $primary-font
+        font-weight: bolder
+        margin: 0
+        letter-spacing: 2px
+      >p.detail
+        color: $primary-color
+        letter-spacing: 1px
+        font-weight: lighter
+    &.profile_2
+      margin-bottom: 10px
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      >a
+        text-align: center
+        margin-bottom: 10px
+        background: $main-background-color
+        width: 90%
+        padding: 10px
+        color: #fff
+        font-family: $primary-font
+        font-weight: bolder
+        border-radius: 3px
+        &.logout
+          background: darkred
+          color: #fff
+
+.pBody
+  padding: 0
+  display: block !important
+  border-radius: 0 !important
+  border: 0
+  border-image: initial
+  background: transparent
+  resize: none !important
+  margin: 0 !important
+  >div
+    width: 100vw
+
+div.topup_provider
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  display: none
+  justify-content: center
+  align-items: center
+  z-index: 11
+  >div
+    width: 50%
+    background: #fff
+    border-radius: 1px
+    box-shadow: 0 0 5px 1px black
+    >h1 , h1 > span
+      margin: 0
+      text-align: center
+      background: $primary-color
+      padding: 10px 0
+      font-family: Moon
+      color: #fff
+      font-size: 25px
+      margin-bottom: 10px
+    >form
+      position: relative
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      >p.title
+        text-align: center
+        font-family: Moon
+        font-size: 20px
+        margin: 0
+      >input
+        border: none
+        background: transparent
+        font-family: Moon
+        outline: none
+        padding: 10px 0
+        border-bottom: 1px solid #000
+        margin-bottom: 10px
+        width: 50%
+        text-align: center
+      >div.pin_box
+        position: relative
+        width: 50%
+        >input
+          border: none
+          background: transparent
+          font-family: Moon
+          outline: none
+          padding: 10px 0
+          border-bottom: 1px solid #000
+          margin-bottom: 10px
+          width: 100%
+          text-align: center
+        >input#topup_provider_pin
+          position: absolute
+          opacity: 0
+          bottom: 0
+          left: 0
+      >div.button_box
+        width: 100%
+        display: flex
+        height: 60px
+        >button
+          width: 50%
+          display: flex
+          justify-content: center
+          align-items: center
+          font-family: Moon
+          color: #fff
+          background: $primary-color
+          &#cancel_button
+            background: darkred

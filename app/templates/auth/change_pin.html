@@ -1,0 +1,74 @@
+{% extends "nav/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    {{ super() }}
+    <meta name="description" content="KUBOS">
+    <meta name="keywords" content="KUBOS">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/mobile/kzusers.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('#nav_settings').attr('class', 'active');
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/template/mobile/auth.js') }}"></script>
+    <script>
+        change_pin();
+
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+    <main id="auth_reset">
+        {% include 'main/user/macros/_nav.html' %}
+        {% include 'main/user/macros/_sidenav.html' %}
+        <form method="post">
+            <div class="form-group required">
+                <label class="control-label" for="old_password">Pin lama</label>
+                <input class="form-control" id="old_password" name="old_password" readonly
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="password" placeholder="PIN lama">
+                <input class="form-control" id="old_pin" name="old_pin"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="tel" placeholder="PIN lama">
+            </div>
+            <div class="form-group  required">
+                <label class="control-label" for="password">Pin baru</label>
+                <input class="form-control" id="password" name="password" readonly
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="password" placeholder="PIN Baru">
+                <input class="form-control" id="pin" name="pin"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="tel" placeholder="PIN baru">
+            </div>
+            <div class="form-group  required">
+                <label class="control-label" for="password2">Konfirmasi Pin baru</label>
+                <input class="form-control" id="password2" name="password2" readonly
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="password" placeholder="Konfirmasi PIN baru">
+                <input class="form-control" id="pin2" name="pin2"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       pattern="[0-9]*" required="" type="tel" placeholder="Konfirmasi PIN baru">
+            </div>
+            <button type="submit">UBAH PIN</button>
+            <div class="notification-box" id="notification-box">
+                <span></span><a id="notif-close">X</a>
+            </div>
+        </form>
+    </main>
+{% endblock %}

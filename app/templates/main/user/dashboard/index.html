@@ -1,0 +1,407 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/dashboard.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Chart.bundle.js') }}"></script>
+    <script>
+      graph();
+    </script>
+    {% endblock %}
+
+
+{% block page_content %}
+  <main id="dashboard_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="_container">
+      <div class="_row">
+        <div class="col_10">
+          <div class="card dashboard_card">
+            <div class="col_1">
+              <h5 class="title"><i class="fa fa-user"></i>Total User</h5>
+              <h2 class="value" id="total_users">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <div class="col_1">
+              <h5 class="title"><i class="fa fa-user"></i>New User</h5>
+              <h2 class="value" id="new_user_month">1000000</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <div class="col_1">
+              <h5 class="title"><i class="fa fa-user"></i>Active User</h5>
+              <h2 class="value" id="total_active_users">-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+            <div class="col_1">
+              <h5 class="title"><i class="fa fa-user"></i>Total Transaction</h5>
+              <h2 class="value last">1000000</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+            <div class="col_1">
+              <h5 class="title"><i class="fa fa-user"></i>Total Transaction</h5>
+              <h2 class="value last">1000000</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="_row">
+        <div class="col_5">
+          <div class="card chart_card">
+            <h5 class="title"><i class="fa fa-user"></i>Total User</h5>
+            <select id="selectYear" onchange="graph()" style="width:22%">
+              <option value="2019" >2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+            <div class="_chart">
+              <canvas id="myChart_line" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col_5">
+          <div class="card chart_card">
+            <h5 class="title"><i class="fas fa-money-bill-wave"></i></i>Total Transaction</h5>
+            <!-- <select id="selectElementId" style="width:22%"></select> -->
+            <div class="_chart">
+              <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="_row">
+        <div class="col_4">
+          <div class="card chart_card">
+            <h5 class="title"></i>Floating Money</h5>
+            <!-- <select id="selectYear1" onchange="graph()" style="width:22%">
+              <option value="2019" >2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select> -->
+            <h2 class="value last" id="total_wallet" style="text-align: right">-</h2>
+            <div class="_chart">
+              <canvas id="myChart_line_1" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col_6">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card">
+                <h5 class="title">
+                  Biggest Individual Transaction
+                  <a class="button">View all</a>
+                </h5>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Name</th>
+                      <th>Categories</th>
+                      <th>Transaction</th>
+                      <!-- <th>Wallet</th> -->
+                    </tr>
+                  </thead>
+                  <tbody id="data_body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col_10" style="padding-bottom: 0;">
+              <div class="card chart_card table_card">
+                <h5 class="title">
+                  Biggest Merchants Transaction
+                  <a class="button">View all</a>
+                </h5>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Categories</th>
+                      <th>Transaction</th>
+                      <!-- <th>Wallet</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><div class="profilePicture"></div></td>
+                      <td>Doe</td>
+
+                      <td>Rp 750,000</td>
+                      <td>Rp 211,500</td>
+                    </tr>
+                    <tr>
+                      <td><div class="profilePicture"></div></td>
+                      <td>Doe</td>
+
+                      <td>Rp 750,000</td>
+                      <td>Rp 211,500</td>
+                    </tr>
+                    <tr>
+                      <td><div class="profilePicture"></div></td>
+                      <td>Doe</td>
+
+                      <td>Rp 5,750,000</td>
+                      <td>Rp 7,752,500</td>
+                    </tr>
+                    <tr>
+                      <td><div class="profilePicture"></div></td>
+                      <td>Moe</td>
+
+                      <td>Rp 750,000</td>
+                      <td>Rp 211,500</td>
+                    </tr>
+                    <tr>
+                      <td><div class="profilePicture"></div></td>
+                      <td>Dooley</td>
+
+                      <td>Rp 5,750,000</td>
+                      <td>Rp 7,752,500</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="translogdetailmodal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                Detail Transaction
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="_translog()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </h5>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col_10" style="padding-top: 0;">
+                  <div class="card chart_card table_card">
+                    <div class="header">
+                      <div class="detail">
+                        <h5 style="font-weight:bold">Detail User</h5>
+                        <table>
+                          <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>UID</th>
+                          </tr>
+                          <tr>
+                            <td id="user_id"></td>
+                            <td id="name"></td>
+                            <td id="type_name"></td>
+                            <td id="amount"></td>
+                            <td id="date"></td>
+                            <td id="uid"></td>
+                          </tr>
+                        </table>
+                        <h5 style="font-weight:bold">Detail Product</h5>
+                        <table>
+                          <tr>
+                            <th>Product Category</th>
+                            <th>Product Detail</th>
+                            <th>Product Type</th>
+                            <th>Provider</th>
+                          </tr>
+                          <tr>
+                            <td id="product_category_name"></td>
+                            <td id="product_detail_name"></td>
+                            <td id="product_type_name"></td>
+                            <td id="provider"></td>
+                          </tr>
+                        </table>
+                        <h5 style="font-weight:bold">Detail REF</h5>
+                        <table>
+                          <tr>
+                            <th>REF ID</th>
+                            <th>REF CA</th>
+                            <th>REF SB</th>
+                            <th>Serial No.</th>
+                          </tr>
+                          <tr>
+                            <td id="ref_id"></td>
+                            <td id="refca"></td>
+                            <td id="refsb"></td>
+                            <td id="serialno"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="col_10">
+                        <h5 class="title">
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="_row">
+        <div class="col_10">
+          <div class="card chart_card table_card">
+            <h5 class="title">
+              <i class="fa fa-envelope"></i>Unread Inbox
+              <a class="button">View all</a>
+            </h5>
+            <div class="table">
+              <div class="header"></div>
+              <div class="body">
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                    <span></span>
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div> -->
+                <!-- <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+              <div class="_row"> -->
+        <!-- <div class="col_10">
+          <div class="card chart_card table_card">
+            <h5 class="title">
+              <i class="fa fa-envelope"></i>Unread Inbox
+              <a class="button">View all</a>
+            </h5>
+            <div class="table">
+              <div class="header"></div>
+              <div class="body">
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                    <span></span>
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="user-name">{{ current_user.name }}
+                  </div>
+                  <div class="summary">
+                    [Invoice Financing] Salurkan Dana Anda ke Bisnis Baru di Modalku [Invoice Financing] Dana...
+                    <span class="time">5:37 AM</span>
+                    <br>
+                    <span class="option">
+                      <a><i class="fa fa-exclamation-triangle"></i></a>
+                      <a><i class="fa fa-star"></i></a>
+                      <a><i class="fa fa-trash"></i></a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        <!-- </div>
+      </div>
+    </div> -->
+  </main>
+{% endblock %}

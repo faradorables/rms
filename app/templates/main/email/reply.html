@@ -1,0 +1,21 @@
+<div style="background: white; border: 1px solid #eee">
+    <div style="background: #eee; padding: 10px;">
+        <h1 style="letter-spacing: 4px;">
+            <b style="background: rgba(0, 0, 0, 0.7); padding: 5px 20px; color: white;">KZ</b> KUBOS
+        </h1>
+    </div>
+    <div style="padding: 10px;">
+        <p>Dear <b>{{ name }}</b>,</p>
+        <p>Welcome to <b>KUBOS</b>! Thank you for reaching us, Buddy!</p>
+        <p>We just receive a message from this email: <b>{{ email|safe }}</b>.</p>
+        <p>Subject: <b>{{head|safe}}.</b></p>
+        <p>Topic: <b>{{topic|safe}}</b>.</p>
+        <p>Your message is:</p>
+        <p><b>{{ comment | safe }}</b></p>
+    </div>
+    <div style="padding: 10px; background: #eee;">
+        <p>Our team will contact you ASAP!</p>
+        <p>Sincerely,</p>
+        <p><b style="letter-spacing: 4px;">KUBOS Team</b></p>
+    </div>
+</div>

@@ -1,0 +1,384 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/templates.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/support.js') }}"></script>
+    <script>
+      _loading(0);
+    </script>
+    <script>
+        _supports();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="projects_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Supports</h1>
+      </div>
+    </div>
+    <div class="_container">
+
+      <div class="_row">
+        <div class="col_10">
+          <div class="card dashboard_card">
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Supports</h5>
+              <h2 class="value" id="total_supports">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Solved Supports</h5>
+              <h2 class="value" id="total_solved">-</h2>
+              <span class="_growth positive"><span>13</span>% increase</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total on Process Support</h5>
+              <h2 class="value" id="total_onprocess">-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Unsolved Supports</h5>
+              <h2 class="value last" id=total_unsolved>-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="_row">
+        <div class="col_2 project_nav">
+          <button onclick="supportForm()"><i class="fa fa-plus"></i>Create Support</button>
+          <div class="card project_card">
+            <a>Ongoing<span class="positive">20</span></a>
+            <a>Finished<span class="positive">20</span></a>
+            <a>Draft<span class="negative">20</span></a>
+            <a>Cancelled<span class="negative">20</span></a>
+          </div>
+        </div>
+
+        <div class="modal fade" id="supportForm" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">
+                  Create Support
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </h5>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col_10" style="padding-top: 0;">
+                    <div class="card chart_card table_card _table_pagination">
+                        <div class="_register">
+                          <!-- <form> -->
+                            <input id="ticket" name="ticket" type="text" placeholder="ION-S-C-001" readonly="readonly">
+                            <input id="id_user" name="id_user" type="text" placeholder="User ID">
+                            <select id="subject_body" name="role" placeholder="Role">
+                              <option value="" disabled selected>Select Role..</option>
+                            </select>
+                            <input id="title" name="title" type="text" placeholder="Title">
+                            <textarea id="description" name="description" type="text" placeholder="Description" rows="4" cols="141"></textarea>
+                            <button class="button_submit" data-dismiss="modal" onclick="add_admin()">Submit</button>
+                          <!-- </form> -->
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col_8">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fa fa-inbox"></i>Support
+              <div class="_filter">
+                <form>
+                  <input type="text" placeholder="Search Support">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+            <div class="table" id="data_body"></div>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+
+            <div class="modal fade" id="supportDetail" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      Support Detail
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </h5>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col_10" style="padding-top: 0;">
+                        <div class="card chart_card table_card">
+                          <div class="header">
+                            <div class="detail">
+                              <p id="detail_id"></p>
+                              <p id="ticket_number"></p>
+                              <h3 id="title_support"></h3>
+                              <p id="description_support"></p>
+                            </div>
+                            <div class="col_10">
+                              <h5 id="title">
+                              </h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            <!-- <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>yehuda@ion-network</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Moe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Dooley</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr><table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>yehuda@ion-network</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Moe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Dooley</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>yehuda@ion-network</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Doe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Moe</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 2,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                <tr>
+                  <td class="id">1</td>
+                  <td><div class="profilePicture"></div></td>
+                  <td>Dooley</td>
+                  <td>08155176008</td>
+                  <td>None</td>
+                  <td>Rp 1,000,000</td>
+                  <td><a class="more fa fa-ellipsis-v"></a></td>
+                </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 1,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>yehuda@ion-network</td>
+                    <td>Rp 2,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 2,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Moe</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 2,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Dooley</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 1,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 1,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>yehuda@ion-network</td>
+                    <td>Rp 2,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+                  <tr>
+                    <td class="id">1</td>
+                    <td><div class="profilePicture"></div></td>
+                    <td>Doe</td>
+                    <td>08155176008</td>
+                    <td>None</td>
+                    <td>Rp 2,000,000</td>
+                    <td><a class="more fa fa-ellipsis-v"></a></td>
+                  </tr>
+              </tbody>
+            </table> -->
+
+            <!-- <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span>1</span>-<span>25</span> of <span>1,000</span><p></div>
+              <a class="disabled"><i class="fa fa-angle-left"></i></a>
+              <a><i class="fa fa-angle-right icon"></i></a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+{% endblock %}

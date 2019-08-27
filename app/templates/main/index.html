@@ -1,0 +1,39 @@
+{% extends "nav/base.html" %}
+
+{% block title %}ION AMS| Road Management System{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <meta name="description" content="ION AMS - Admin Management System">
+    <meta name="keywords" content="ION AMS - Admin Management System">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/starter.min.css') }}">
+    <style>
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/template/auth.js') }}"></script>
+    <script>
+        login();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  {% include 'main/macros/_loading.html' %}
+  {% include 'main/macros/_notif.html' %}
+  <main id="auth_login">
+      <form method="post" autocomplete="false">
+          <img src="{{ url_for('static', filename='src/logo.png') }}">
+          <h2>Road Management System</h2>
+          <input name="email" id="email" type="email" placeholder="Client E-Mail..">
+          <div class="pass">
+              <input id="pin" name="pin" type="password" placeholder="PIN..">
+              <input type="checkbox" id="view_pass">
+              <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+          </div>
+          <button type="submit">Masuk</button>
+      </form>
+  </main>
+{% endblock %}

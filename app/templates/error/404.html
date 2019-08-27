@@ -1,0 +1,52 @@
+{% extends "nav/base.html" %}
+{% block head %}
+    {{ super() }}
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #00A246;
+        }
+
+        *{
+            color: #fff;
+        }
+
+        a{
+            border: 1px solid #F4FF00;
+            color: #F4FF00;
+            padding: 5px 10px;
+            text-decoration: none !important;
+            transition: 500ms;
+            margin-left: 5px;
+        }
+
+        a:hover, a:focus, a:active{
+            color: #00A246;
+            background: #F4FF00;
+        }
+
+    .logo{
+        width: 60%;
+    }
+
+
+@media screen and (max-width: 450px ){
+    .logo{
+        width: 90%;
+    }
+}
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <img class="logo" src="{{ url_for('static', filename='src/logo.png') }}">
+            <h1 style="margin: 50px 0 25px 0;">Page Not Found</h1>
+        </div>
+        <p>What you were looking for is just not there.</p>
+        <p>Go back to the <a target="_top" href="/">main page</a></p>
+    </div>
+{% endblock %}

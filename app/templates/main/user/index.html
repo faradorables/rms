@@ -1,0 +1,23 @@
+{% extends "nav/base.html" %}
+
+{% block title %}ION AMS| Admin Management System{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <meta name="description" content="ION AMS - Admin Management System">
+    <meta name="keywords" content="ION AMS - Admin Management System">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+{% endblock %}
+
+
+{% block page_content %}
+    {% include 'main/macros/_loading.html' %}
+    {% include 'main/macros/_notif.html' %}
+    {% include 'main/macros/_header.html' %}
+    {% include 'main/macros/_sidenav.html' %}
+    <div id="mainBody"></div>
+{% endblock %}

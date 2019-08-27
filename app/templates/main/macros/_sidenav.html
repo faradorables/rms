@@ -1,0 +1,139 @@
+<script src="{{ url_for('static', filename='js/admin/users.js') }}"></script>
+<nav id="sidenav_1" class="sidenav" data-status="true">
+    <div>
+      <!-- <a href="#" id="nav_dashboard" onclick="nav_href('dashboard')">
+          <i class="fa fa-laptop"></i>
+          <p>Dashboard</p>
+      </a> -->
+      <a id="nav_usernav" class="_output_3">
+          <i class="fas fa-archway"></i>
+          <p>Plaza</p>
+      </a>
+      <a id="nav_pricingnav" onclick="nav_href('pricing')">
+          <i class="fas fa-money-bill-wave"></i>
+          <p>Pricing</p>
+      </a>
+      <!-- <a id="nav_bujtnav" class="_output_3">
+          <i class="fas fa-road"></i>
+          <p>BUJT</p>
+      </a> -->
+      <!-- <a id="nav_merchants"  onclick="nav_href('merchants')">
+          <i class="fa fa-shopping-bag"></i>
+          <p>Merchants</p>
+      </a>
+      <a id="nav_projects"  onclick="nav_href('projects')">
+          <i class="fa fa-inbox"></i>
+          <p>Projects</p>
+      </a>
+      <a id="nav_mailboxes"  onclick="nav_href('mailboxes')">
+          <i class="fa fa-envelope"></i>
+          <p>Mailboxes</p>
+      </a>
+      <a href="#" id="nav_admin" onclick="nav_href('admin')">
+          <i class="fa fa-users"></i>
+          <p>Admin</p>
+      </a> -->
+      <a id="nav_settings" class="_output_2">
+          <i class="fa fa-cogs"></i>
+          <p>Pengaturan</p>
+      </a>
+    </div>
+    <a id="nav_max" onclick="_min_max_nav()">
+        <i class="fa fa-angle-left"></i>
+    </a>
+</nav>
+
+<div class="sidenav2" id="settings">
+    <a href="#" class="sidenav2_close">
+        <i class="fa fa-angle-left"></i>
+        <p>Close</p>
+    </a>
+    <!-- <a href="#" id="nav_settings_history"  onclick="settings('history')">
+        <i class="fa fa-newspaper-o"></i>
+        <p>History Log</p>
+    </a>
+    <a href="#" id="nav_request" onclick="nav_href('request')">
+        <i class="fa fa-newspaper-o"></i>
+        <p>Request Log</p>
+    </a>
+    <a href="#" id="nav_translog" onclick="nav_href('transaction')">
+        <i class="fa fa-newspaper-o"></i>
+        <p>Transaction Log</p>
+    </a> -->
+    <a href="#" id="nav_settings_history_log">
+        <i class="fa fa-key"></i>
+        <p>Ganti Password</p>
+    </a>
+    <a href="#" id="nav_settings_sign_out" onclick="logout()">
+        <i class="fa fa-sign-out"></i>
+        <p>Keluar</p>
+    </a>
+</div>
+
+<div class="sidenav3" id="usernav">
+    <a href="#" class="sidenav3_close">
+        <i class="fa fa-angle-left"></i>
+        <p>Close</p>
+    </a>
+    <a href="#" id="nav_user" onclick="nav_href('users')">
+        <i class="fas fa-list-alt"></i>
+        <p>List Plaza</p>
+    </a>
+    <a href="#" id="nav_usernav_history_log" onclick="formPassword()">
+        <i class="fa fa-plus"></i>
+        <p>Add Plaza</p>
+    </a>
+</div>
+
+<div class="sidenav3" id="obunav">
+    <a href="#" class="sidenav3_close">
+        <i class="fa fa-angle-left"></i>
+        <p>Close</p>
+    </a>
+    <a href="#" id="nav_obu" onclick="nav_href('obu')">
+        <i class="fas fa-list-alt"></i>
+        <p>List OBU</p>
+    </a>
+    <a href="#" id="nav_obunav_history_log" onclick="obuPassword()">
+        <i class="fa fa-plus"></i>
+        <p>Add OBU</p>
+    </a>
+</div>
+
+<div class="sidenav3" id="bujtnav">
+    <a href="#" class="sidenav3_close">
+        <i class="fa fa-angle-left"></i>
+        <p>Close</p>
+    </a>
+    <a href="#" id="nav_bujt" onclick="nav_href('BUJT')">
+        <i class="fas fa-list-alt"></i>
+        <p>List Client</p>
+    </a>
+    <a href="#" id="nav_bujtnav_history_log" onclick="nav_href('addclient')">
+        <i class="fa fa-plus"></i>
+        <p>Add Client</p>
+    </a>
+</div>
+
+<div class="sidenav2" id="products">
+    <a href="#" class="sidenav2_close">
+        <i class="fa fa-angle-left"></i>
+        <p>Close</p>
+    </a>
+    <a href="#" id="nav_news_category"  onclick="products('detail')">
+        <i class="fa fa-cubes"></i>
+        <p>Detail</p>
+    </a>
+    <a href="#" id="nav_news_source" onclick="products('provider')">
+        <i class="fa fa-cube"></i>
+        <p>Provider</p>
+    </a>
+    <a href="#" id="nav_news_source" onclick="products('type')">
+        <i class="fa fa-tags"></i>
+        <p>Type</p>
+    </a>
+    <a href="#" id="nav_news_source" onclick="products('payment')">
+        <i class="fa fa-tags"></i>
+        <p>Payment</p>
+    </a>
+</div>

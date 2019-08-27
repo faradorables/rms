@@ -1,0 +1,71 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/request.js') }}"></script>
+    <script>
+        _request();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="dashboard_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Request Log</h1>
+      </div>
+    </div>
+    <div class="_container">
+      <div class="_row">
+        <div class="col_10">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fa fa-user"></i>Request Log
+              <div class="_filter">
+                <select id="showBy" onchange="showBy()" name="show" placeholder="Role">
+                  <option value="all" >All</option>
+                  <option value="upgraded">Upgraded</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+                <form>
+                  <input type="text" placeholder="Search user">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+            <!-- <div class="table" id="data_body"></div> -->
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+              <tbody id="data_body"></tbody>
+            </table>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

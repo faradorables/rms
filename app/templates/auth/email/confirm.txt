@@ -1,0 +1,14 @@
+Dear {{ user.username }},
+
+Welcome to KUBOS!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+|  replace('127.0.0.1:9000', 'ion.id')|  replace('127.0.0.1:9000', 'ion.id')
+
+Sincerly,
+
+KUBOS Team
+
+Note : replies to this email address are not monitored

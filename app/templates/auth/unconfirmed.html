@@ -1,0 +1,47 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        *{
+            color: #ee4f4f;
+        }
+
+        a{
+            border: 1px solid #ee4f4f;
+            color: #ee4f4f;
+            padding: 5px 10px;
+            text-decoration: none !important;
+            transition: 500ms;
+            margin-left: 5px;
+        }
+
+        a:hover, a:focus, a:active{
+            color: white;
+            background: #ee4f4f;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}KUBOS{% endblock %}
+
+{% block page_content %}
+    <div class="bLayer"></div>
+    <div class="container">
+        <div class="page-header">
+            <img style="width: 450px;" src="{{ url_for('static', filename='src/logo.png') }}">
+            <h1 style="margin: 50px 0 25px 0;">
+                Hello, {{ current_user.kta_num }}!
+            </h1>
+            <h3>You have not confirmed your account yet.</h3>
+        </div>
+        <p>
+            Before you can access this site you need to confirm your account.
+            Check your inbox, you should have received an email with a confirmation link.
+        </p>
+        <p>
+            Need another confirmation email?
+        </p>
+        <p><a target="_top" href="{{ url_for('auth.resend_confirmation') }}">Click here</a></p>
+    </div>
+{% endblock %}

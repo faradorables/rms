@@ -1,0 +1,697 @@
+/**
+ * Developed by ION Developer Team
+ * URL : https://ion.eco
+
+
+$primary-color: #392c70
+$secondary-color: lighten($primary-color, 30%)
+$netral: transparent
+$light: #fff
+$semilight: #f0f4f8
+$dark: #222
+$danger: #8b0000
+$positive: #04B76B
+$negative: #FF5E6D
+$netral: transparent
+$green: forestgreen
+$orange: coral
+
+$font: 'Futura'
+$primary-font: 'Futura Light'
+$secondary-font: 'Futura Medium'
+$third-font: 'Futura Bold'
+
+
+*
+  box-sizing: border-box
+
+div#notification-box
+  position: absolute
+  width: 350px
+  background: $netral
+  font-size: 12px
+  display: inherit
+  right: 2.5%
+  bottom: 5%
+  justify-content: space-between
+  z-index: 11
+  >div
+    height: auto
+    box-shadow: 0 0 5px 0px
+    margin-top: 15px
+    display: flex
+    align-items: center
+    position: relative
+    transition: 1000ms
+    &.danger
+      background-color: lighten($danger, 5%)
+    &.notif
+      background-color: lighten($dark, 25%)
+    &.success
+      background-color: green
+    &.warning
+      background-color: darken($orange, 15%)
+    &.info
+      background-color: $primary-color
+    &:nth-child(1)
+      margin-top: 0
+    >.left
+      width: 50px
+      height: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      >i
+        color: $light
+        font-size: 20px
+    >.right
+      width: 275px
+      display: flex
+      flex-direction: column
+      align-items: left
+      padding: 5px 10px
+      height: 100%
+      color: $dark
+      font-family: $secondary-font
+      >h5
+        font-size: 13px
+        font-family: $secondary-font
+      >p
+        font-family: $primary-font
+        color: $dark
+      &.danger
+        background-color: lighten($danger, 10%)
+        color: $dark
+      &.notif
+        background-color: lighten($dark, 40%)
+        color: $dark
+      &.success
+        background-color: lighten($green, 10%)
+        color: $dark
+      &.warning
+        background-color: darken($orange, 5%)
+        color: $dark
+      &.info
+        background-color: lighten($primary-color, 5%)
+        color: $dark
+    >a
+      width: 25px
+      background-color: $netral
+      display: flex
+      align-items: center
+      justify-content: center
+      font-weight: bolder
+      font-size: 15px
+      cursor: pointer
+      color: $light
+
+div#panel-layer
+  position: fixed
+  width: 100vw
+  height: 100vh
+  background: rgba(255, 255, 255, .8)
+  top: 0
+  left: 0
+  z-index: 10000
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  transition: 300ms
+  h1
+    font-family: $third-font
+    color: $primary-color
+    letter-spacing: 4px
+
+html, body
+  background-color: $semilight
+  margin: 0 auto
+  width: 100%
+  height: 100%
+  padding: 0 !important
+  overflow-x: hidden
+
+.col-sm-12
+  width: 100%
+
+@font-face
+  font-family: 'Futura Light'
+  src: url(/static/fonts/Futura_Book_font.ttf)
+
+@font-face
+  font-family: 'Futura Medium'
+  src: url(/static/fonts/Futura_Heavy_font.ttf)
+
+@font-face
+  font-family: 'Futura Bold'
+  src: url(/static/fonts/Futura_Bold_font.ttf)
+
+a:hover
+  text-decoration: none
+
+\::-webkit-input-placeholder
+  color: $primary-color
+  font-family: $secondary-font
+
+\:-moz-placeholder
+  color: $primary-color
+  font-family: $secondary-font
+
+\::-moz-placeholder
+  color: $primary-color
+  font-family: $secondary-font
+
+\:-ms-input-placeholder
+  color: $primary-color
+  font-family: $secondary-font
+
+input
+  width: 100%
+  background: transparent
+  border: none
+  border-radius: 0
+  padding: 10px
+  color: $primary-color
+  font-family: $secondary-font
+  margin-top: 20px
+  font-size: 12px
+  letter-spacing: 1px
+  border-bottom: 1px solid $primary-color
+  &:focus
+    outline: none
+select
+  width: 50%
+  background: transparent
+  border: none
+  border-radius: 0
+  padding: 10px
+  padding-right: 10px
+  color: $primary-color
+  font-family: $secondary-font
+  margin-right: 30px
+  font-size: 12px
+  letter-spacing: 1px
+  border-bottom: 1px solid $primary-color
+  &:focus
+    outline: none
+
+textarea
+  width: 100%
+  background: transparent
+  border: none
+  border-radius: 0
+  padding: 10px
+  color: $primary-color
+  font-family: $secondary-font
+  margin-top: 20px
+  font-size: 12px
+  letter-spacing: 1px
+  border-bottom: 1px solid $primary-color
+  &:focus
+    outline: none
+
+div.pass
+  >input
+    width: 100%
+    background: transparent
+    border: none
+    border-radius: 0
+    padding: 10px
+    color: $primary-color
+    margin-top: 25px
+    font-size: 12px
+    letter-spacing: 1px
+    border-bottom: 1px solid $primary-color
+    &:focus
+      outline: none
+  >input#view_pass + label
+    position: relative
+    top: -27.5px
+    font-size: 20px
+    color: lighten($primary-color, 15%)
+    margin: 0 90%
+    cursor: pointer
+  >input#view_pass:checked + label
+    color: $primary-color
+
+input[type='checkbox']
+  display: none
+
+button
+  outline: none
+  border: 1px solid
+
+div#mainBody
+  min-height: 100%
+  margin-top: 60px
+  padding-top: 60px
+  padding-left: 200px
+  position: relative
+  div.inmain_nav
+    background: $light
+    position: absolute
+    width: 100%
+    box-shadow: 0 0 8px -3px #777
+    height: 60px
+    display: flex
+    align-items: center
+    padding: 0 10px
+    top: 0
+    h1, p
+      margin: 0
+      color: $primary-color
+    h1
+      font-family: $font
+      font-weight: bolder
+      font-size: 20px
+  div._container
+    padding: 0 50px
+
+._row
+  margin-top: 15px
+  margin-bottom: 15px
+  display: flex
+
+.col_1, .col_2, .col_3, .col_4, .col_5,
+.col_6, .col_7, .col_8, .col_9, .col_10
+  padding: 10px
+
+.col_1
+  width: 20%
+.col_2
+  width: 25%
+.col_3
+  width: 33.33%
+.col_4
+  width: 40%
+.col_5
+  width: 50%
+.col_6
+  width: 60%
+.col_7
+  width: calc(100% - 33.33%)
+.col_8
+  width: 75%
+.col_9
+  width: 80%
+.col_10
+  width: 100%
+
+.card
+  width: 100%
+  background: $light
+  border-radius: 5px
+  box-shadow: 0 0 8px -3px #777
+  position: relative
+  &.dashboard_card
+    display: flex
+    align-items: center
+    padding: 25px 50px
+    background: linear-gradient(85deg, #392c70, #6a005b)
+    color: $light
+    font-family: $primary-font
+    h5.title
+      margin: 0
+      i
+        margin-right: 15px
+    h2.value
+      margin: 20px 0
+      font-size: 20px
+    span._growth
+      border-radius: 5px
+      padding: 3px 10px
+      &.positive
+        border: 1px solid $positive
+        color: $positive
+      &.negative
+        border: 1px solid $negative
+        color: $negative
+  &.project_card
+    background: $light
+    padding: 0 10px
+    display: flex
+    flex-direction: column
+    font-family: $secondary-font
+    font-size: 20px
+    >div.title
+      position: relative
+      padding: 10px
+      color: $dark
+      cursor: pointer
+      transition: 300ms
+      >a
+        position: absolute
+        right: 0
+        color: $dark
+        right: 10px
+        font-size: 12px
+        padding: 5px
+        border-radius: 5px
+        width: 30px
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 30px
+        top: 10px
+        transition: 200ms
+        &:hover
+          background-color: darken($semilight, 5%)
+    >div.menu
+      border-top: 1px solid $semilight
+      display: flex
+      flex-direction: column
+      >a
+        position: relative
+        padding: 10px
+        color: $dark
+        cursor: pointer
+        transition: 300ms
+        &:hover
+          color: $primary-color
+        &:nth-last-child(1)
+          border: none
+        >span
+          position: absolute
+          right: 0
+          color: $dark
+          right: 10px
+          font-size: 12px
+          padding: 5px
+          border-radius: 5px
+          &.positive
+            background: $positive
+          &.negative
+            background: $negative
+    >a
+      position: relative
+      padding: 10px
+      border-bottom: 1px solid $semilight
+      color: $dark
+      cursor: pointer
+      transition: 300ms
+      &:hover
+        color: $primary-color
+      &:nth-last-child(1)
+        border: none
+      >span
+        position: absolute
+        right: 0
+        color: $dark
+        right: 10px
+        font-size: 12px
+        padding: 5px
+        border-radius: 5px
+        &.positive
+          background: $positive
+        &.negative
+          background: $negative
+
+  &.chart_card
+    padding: 25px 40px
+    display: flex
+    flex-direction: column
+    height: 100%
+    font-family: $primary-font
+    h5.title
+      margin: 0 0 20px
+      font-size: 20px
+      position: relative
+      i
+        margin-right: 15px
+    h2.value
+      margin: 0 0 20px
+      font-size: 25px
+    div._chart
+      display: flex
+      justify-content: center
+      align-items: center
+    &.table_card
+      padding: 25px 10px
+      &._table_pagination
+        padding-bottom: 50px
+      h5.title
+        padding: 0 10px
+        margin-bottom: 35px
+        color: $primary-color
+        div._filter
+          position: absolute
+          right: 10px
+          top: 0
+          display: flex
+          form, div
+            display: flex
+            input
+              margin-top: 0
+              border: 1px solid $primary-color
+              border-radius: 3px 0 0 3px
+              min-width: 150px
+            button
+              border: 1px solid $primary-color
+              color: $light
+              background: $primary-color
+              font-family: $secondary-font
+              font-size: 15px
+              border-radius: 0 3px 3px 0
+          div._register
+            position: absolute
+            right: 10px
+            top: 0
+            display: flex
+            form, div
+              display: flex
+              input
+                width: 51%
+                background: transparent
+                border: 5px solid
+                border-radius: 5px
+                padding: 10px
+                color: #392c70
+                font-family: "Futura Medium"
+                margin-top: 20px
+                font-size: 12px
+                letter-spacing: 1px
+                /* border-bottom: 1px solid #392c70; */
+                border-color: #392c70
+              button
+                border: 1px solid $primary-color
+                color: $light
+                background: $primary-color
+                font-family: $secondary-font
+                font-size: 15px
+                border-radius: 0 3px 3px 0
+        >a
+          position: absolute
+          right: 30px
+          padding: 10px
+          background-color: $primary-color
+          cursor: pointer
+          color: $light
+          transition: 300ms
+          &:hover
+            background-color: $secondary-color
+      div.table
+        >div
+          display: flex
+          font-size: 15px
+          position: relative
+          justify-content: space-between
+          border-bottom: 1px solid $semilight
+          cursor: pointer
+          >div
+            min-height: 45px
+            display: flex
+            align-items: center
+            padding: 0 5px
+            &.id
+              flex-basis: 40px
+              justify-content: center
+            &.name, &.email, &.phone, &.value,
+              flex-basis: 250px
+              padding-left: 10px
+            &.summary
+              padding: 10px 10px 10px
+              display: flex
+              flex-direction: column
+              align-items: start
+              justify-content: center
+              position: relative
+              >div.attachment_list
+                margin-top: 10px
+                >div.attachment
+                  border: 1px solid darken(#eee, 50%)
+                  color: darken(#eee, 50%)
+                  background: transparent
+                  padding: 2.5px 10px
+                  border-radius: 15px
+            &.option
+              >a
+                display: flex
+                justify-content: center
+                align-items: center
+                color: darken(#eee, 20%)
+                font-size: 17.5px
+                width: 30px
+                height: 30px
+                transition: 300ms
+                &:hover
+                  color: darken(#eee, 70%)
+                  font-weight: bolder
+                  background: darken(#eee, 10%)
+                  border-radius: 100%
+              // >span
+              //   position: absolute
+              //   padding-right: 20px
+              //   height: 90%
+              //   padding-left: 10px
+              //   right: 0
+              //   min-width: 100px
+              //   display: flex
+              //   justify-content: flex-end
+              //   align-items: center
+              //   background: $light
+              //   &.option
+              //     display: none
+              //     >a
+              //       display: flex
+              //       justify-content: center
+              //       align-items: center
+              //       color: darken(#eee, 20%)
+              //       font-size: 17.5px
+              //       width: 30px
+              //       height: 30px
+              //       transition: 300ms
+              //       &:hover
+              //         color: darken(#eee, 70%)
+              //         font-weight: bolder
+              //         background: darken(#eee, 10%)
+              //         border-radius: 100%
+          >div.sec_checkbox
+            input[type=checkbox]
+              + label
+                display: block
+                margin: 0.2em
+                cursor: pointer
+                padding: 0.2em
+                &:before
+                  content: "\2714"
+                  border: 0.15em solid darken($light, 20%)
+                  border-radius: 0.2em
+                  display: inline-block
+                  width: 1.5em
+                  height: 1.5em
+                  margin-right: 0.2em
+                  vertical-align: bottom
+                  color: transparent
+                  transition: .2s
+                &:active:before
+                  transform: scale(0)
+              display: none
+              &:checked + label:before
+                background-color: $netral
+                border-color: darken($light, 90%)
+                color: darken($light, 90%)
+              &:disabled + label:before
+                transform: scale(1)
+                border-color: #aaa
+              &:checked:disabled + label:before
+                transform: scale(1)
+                background-color: #bfb
+                border-color: #bfb
+          div.profilePicture
+            width: 30px
+            height: 30px
+            background-image: url("/static/src/icon/pp.png")
+            background-size: cover
+            background-position: center
+            background-color: #fff
+          span.user_type
+            border-radius: 3px
+            border: 1px solid
+            padding: 10px 15px
+            cursor: pointer
+            transition: 300ms
+            font-family: $secondary-font
+            &.user
+              border-color: $positive
+              color: $positive
+              &:hover
+                background-color: $positive
+                color: $light
+            &.merchant
+              color: $negative
+              &:hover
+                background-color: $negative
+                color: $light
+          &.read
+            background: $semilight
+            >td
+              >div.summary
+                >span
+                  background: $semilight
+          &.unread
+            background: $light
+            >td
+              >div.name
+                font-weight: bolder
+              >div.summary
+                font-weight: bolder
+                >span
+                  background: $light
+          &:hover
+            box-shadow: 0 0 2px 0px
+            z-index: 1
+            border-radius: 5px
+            >td
+              >div.summary
+                >span
+                  &.time
+                    display: none
+                  &.option
+                    display: flex
+
+div._pagination
+  display: flex
+  margin-left: 10px
+  &._bottom_pagination
+    position: absolute
+    right: 20px
+    bottom: 25px
+  div.page
+    display: flex
+    font-size: 15px
+    margin-right: 10px
+    justify-content: center
+    align-items: center
+    p
+      margin: 0
+  a
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: $primary-color
+    width: 30px
+    min-height: 36px
+    color: $light
+    cursor: pointer
+    transition: 300ms
+    font-size: 20px
+    &:hover
+      background-color: $secondary-color
+    &.disabled
+      background-color: #eee
+    i.icon
+      margin: 0 !important
+
+div._buttonadd
+  display: flex
+  margin-left: 10px
+  position: absolute
+.modal
+  .modal-dialog
+    width: 90%
+    .modal-header
+      .modal-title
+        font-size: 20px
+        font-family: $secondary-font
+        color: $primary-color

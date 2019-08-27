@@ -1,0 +1,74 @@
+{% extends "nav/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    {{ super() }}
+    <meta name="description" content="KUBOS">
+    <meta name="keywords" content="KUBOS">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/mobile/kzusers.css') }}">
+    <style>
+        #alert{
+            box-shadow: 0 -3px 7px 1px black;
+            top: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+
+        $('input#view_pass').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('input#password').attr('type', 'text');
+            }else{
+                $('input#password').attr('type', 'password');
+            }
+        })
+    </script>
+    <script src="{{ url_for('static', filename='js/template/mobile/auth.js') }}"></script>
+    <script>
+        login();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+    <div data-role="page" id="pageone">
+        <div data-role="main" class="ui-content">
+            <main id="auth_login">
+                <form method="post" autocomplete="false">
+                    <img src="{{ url_for('static', filename='src/logo.png') }}">
+                    <input name="username" id="username" type="text" placeholder="E-Mail/Username">
+                    <div class="pass">
+                        <input id="password" name="password" type="password" placeholder="Password">
+                        <input type="checkbox" id="view_pass">
+                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                    </div>
+                    <button type="submit">MASUK</button>
+                    <p>
+                        <a onclick="loader(1);" href="{{url_for('auth.password_reset_request')}}" class="reset">Lupa Password?</a>
+                        Klik disini untuk<br>
+                        mendapatkan password anda kembali
+                    </p>
+                    <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+                    <div class="notification-box" id="notification-box">
+                        <span></span><a id="notif-close">X</a>
+                    </div>
+                </form>
+                <a onclick="loader(1); " class="register" href="{{url_for('auth.register')}}">
+                    Belum mempunyai akun?
+                    <span>Daftar Sekarang</span>
+                </a>
+            </main>
+        </div>
+    </div>
+{% endblock %}

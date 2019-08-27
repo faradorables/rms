@@ -1,0 +1,8 @@
+<p>Dear {{ user.username }},</p>
+<p>Welcome to <b>Early Warning</b>!</p>
+<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, _external=True) |  replace('127.0.0.1:8080', 'ion.id')|  replace('127.0.0.1:8181', 'ion.id') |  replace('127.0.0.1:9000', 'ewarning.ion.id')|  replace('127.0.0.1:9000', 'ewarning.ion.id')   }}">click here</a>.</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) |  replace('127.0.0.1:9000', 'ewarning.ion.id')|  replace('127.0.0.1:9000', 'ewarning.ion.id')   }}</p>
+<p>Sincerely,</p>
+<p>Early Warning Team</p>
+<p><small>Note: replies to this email address are not monitored.</small></p>

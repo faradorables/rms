@@ -1,0 +1,244 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/template/auth.js') }}"></script>
+    <script>
+        _admins();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="dashboard_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Admin</h1>
+      </div>
+    </div>
+    <div class="_container">
+      <div class="_row">
+        <div class="col_10">
+          <div class="card dashboard_card">
+            <div class="col_6">
+              <h5 class="title"><i class="fa fa-users"></i>Total Admin</h5>
+              <h2 class="value" id="total_admins">-</h2>
+            </div>
+            <div class="col_6">
+              <h5 class="title"><i class="fa fa-user"></i>Total Active Admin</h5>
+              <h2 class="value" id="total_active_admins">-</h2>
+            </div>
+            <div class="col_6">
+              <h5 class="title"><i class="fa fa-user-slash"></i>Total Passive Admin</h5>
+              <h2 class="value" id="total_passive_admins">-</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="_row">
+        <div class="col_10">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fa fa-user"></i>Admin
+              <div class="_filter">
+                <button class="button_add" onclick="adminForm()"><i class="fas fa-plus"></i>Add Admin</button>
+                <form>
+                  <input type="text" placeholder="Search Admin">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+
+            <div class="table" id="data_body"></div>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- form admin -->
+    <div class="modal fade" id="adminForm" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Add Admin
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card _table_pagination">
+                    <div class="_register">
+                      <!-- <form> -->
+                        <input id="name" name="name" type="text" placeholder="Name">
+                        <input id="email" name="email" type="email" placeholder="E-mail">
+                        <input id="phone" name="phone" type="number" placeholder="Mobile Number">
+                        <input id="pin" name="pin" type="number" placeholder="PIN">
+                        <select id="role_body" name="role" placeholder="Role">
+                          <option value="" disabled selected>Select Role..</option>
+                        </select>
+                        <div class="pass">
+                            <input id="password" name="password" type="password" placeholder="Password">
+                            <input type="checkbox" id="view_pass">
+                            <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                        </div>
+                        <button class="button_submit" data-dismiss="modal" onclick="add_admin()">Submit</button>
+                      <!-- </form> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- detail admin -->
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Admin Detail
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card">
+                  <div class="header">
+                    <div class="profilePicture"></div>
+                    <div class="detail">
+                      <p id="detail_id"></p>
+                      <h3 id="detail_name"></h3>
+                      <p id="detail_phone"></p>
+                      <p id="detail_email"></p>
+                      <p id="detail_role_id"></p>
+                      <p id="detail_role_name"></p>
+                    </div>
+                      <div class="col_10">
+                        <h5 class="title">
+                          <a class="button" onclick="editForm()"> Edit Adm</a>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="row"> -->
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card">
+                  <h5 class="title">
+                    History Transaction
+                    <a class="button" onclick="editForm()">View all</a>
+                  </h5>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Categories</th>
+                        <th>Transaction</th>
+                        <th>Wallet</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="profilePicture"></div></td>
+                        <td>Doe</td>
+
+                        <td>Rp 750,000</td>
+                        <td>Rp 211,500</td>
+                      </tr>
+                      <tr>
+                        <td><div class="profilePicture"></div></td>
+                        <td>Doe</td>
+
+                        <td>Rp 750,000</td>
+                        <td>Rp 211,500</td>
+                      </tr>
+                      <tr>
+                        <td><div class="profilePicture"></div></td>
+                        <td>Doe</td>
+                        <td>Rp 5,750,000</td>
+                        <td>Rp 7,752,500</td>
+                      </tr>
+                      <tr>
+                        <td><div class="profilePicture"></div></td>
+                        <td>Moe</td>
+
+                        <td>Rp 750,000</td>
+                        <td>Rp 211,500</td>
+                      </tr>
+                      <tr>
+                        <td><div class="profilePicture"></div></td>
+                        <td>Dooley</td>
+
+                        <td>Rp 5,750,000</td>
+                        <td>Rp 7,752,500</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              <!-- </div> -->
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- edit admin -->
+    <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Edit Admin
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card _table_pagination">
+                    <div class="_register">
+                      <!-- <form> -->
+                        <input id="name2" name="name" type="text" placeholder="Name">
+                        <input id="email2" name="email" type="email" placeholder="E-mail">
+                        <input id="phone2" name="phone" type="number" placeholder="Mobile Number">
+                        <select id="role_body2" name="role" placeholder="Role">
+                          <option value="" disabled selected>Select Role..</option>
+                        </select>
+                        <button class="button_add" data-dismiss="modal" onclick="edit_admin()" style="Float:right">Submit</button>
+                      <!-- </form> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

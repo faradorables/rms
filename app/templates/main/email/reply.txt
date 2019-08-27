@@ -1,0 +1,19 @@
+Dear {{ name }},
+
+Welcome to KUBOS! Thank you for reaching us, Buddy!
+
+We just receive a message from this email: {{ email|safe }}.
+
+Subject: {{head|safe}}.
+
+Topic: {{topic|safe}}.
+
+Your message is:
+
+{{ comment | safe }}
+
+Our team will contact you ASAP!
+
+Sincerly,
+
+KUBOS Team

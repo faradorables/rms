@@ -1,0 +1,205 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/upgrade.js') }}"></script>
+    <script>
+        list_request_upgrade();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="dashboard_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Request Upgrade</h1>
+      </div>
+    </div>
+    <div class="_container">
+      <div class="_row">
+        <div class="col_10">
+          <div class="card dashboard_card">
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Request Upgrade</h5>
+              <h2 class="value" id="total_users">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <!-- <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Active User</h5>
+              <h2 class="value" id="total_active_users">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div> -->
+            <!-- <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total's wallet</h5>
+              <h2 class="value" id="total_wallet">-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div> -->
+            <!-- <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total's transaction</h5>
+              <h2 class="value last" id="total_trx">Rp 500,000,000,000</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="_row">
+        <div class="col_10">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fa fa-user"></i>Request(s) Upgrade
+              <div class="_filter">
+                <form>
+                  <input type="text" placeholder="Search user">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+            <div class="table" id="data_body"></div>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal fade" id="upgradeDetail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Upgrade Detail
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card"><h5 class="modal-title">Photos</h5>
+                <div class="header">
+                  <div class="detail">
+                    <div class="col_6">
+                      <div class="row">
+                        <div class="column">
+                          <img id="selfie_photo" alt="Selfie Photo">
+                          <p style="text-align:center">Selfie Photo</p>
+                        </div>
+                        <div class="column">
+                          <img id="id_card" alt="ID Card">
+                          <p style="text-align:center">ID Card</p>
+                        </div>
+                        <div class="column"><h5 class="title"><button class="button_accept" style="position:sticky; margin-left:30px" onclick="verifaccPassword()" data-dismiss="modal"><i class="fas fa-check"></i>Accept</button></h5></div>
+                        <div class="column"><h5 class="title"><button class="button_reject" style="position:sticky; margin-left:30px" onclick="verifrejPassword()" data-dismiss="modal"><i class="fas fa-times"></i>Reject</button></h5></div>
+                      </div>
+                        <div class="col_6">
+                          <div class="row">
+                            <!-- <div class="table">
+                              <table>
+                                <tr>
+                                  <th>Upgrade ID</th>
+                                  <td id="id_upgrade"></td>
+                                </tr>
+                                <tr>
+                                  <th>User ID</th>
+                                  <td id="user_id"></td>
+
+                                </tr>
+                                <tr>
+                                  <th>Status</th>
+                                  <td id="status_upgrade"></td>
+                                </tr>
+                              </table>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="verifaccPassword" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Verify Password
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card _table_pagination">
+                    <div class="_register">
+                      <!-- <form> -->
+                      <div class="pass">
+                          <input id="password" name="password" type="password" placeholder="Input Your Password..">
+                          <input type="checkbox" id="view_pass">
+                          <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                      </div>
+                        <button type="submit" class="button_submit" data-dismiss="modal" onclick="verif_password_acc()">Verify</button>
+                      <!-- </form> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="verifrejPassword" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Verify Password
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col_10" style="padding-top: 0;">
+                <div class="card chart_card table_card _table_pagination">
+                    <div class="_register">
+                      <!-- <form> -->
+                      <div class="pass">
+                          <input id="password1" name="password1" type="password" placeholder="Input Your Password..">
+                          <input type="checkbox" id="view_pass">
+                          <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                      </div>
+                        <button type="submit" class="button_submit" data-dismiss="modal" onclick="verif_password_reject()">Verify</button>
+                      <!-- </form> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

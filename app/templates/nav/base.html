@@ -1,0 +1,40 @@
+{% extends "bootstrap/base.html" %}
+
+
+{% block title %}ION AMS| Admin Management System{% endblock %}
+
+{% block head %}
+    {#    {{ super() }}#}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-2.1.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='src/fav.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='src/fav.png') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="/static/css/styles.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('button[data-dismiss="alert"]').on('click', function () {
+            $(this).parent().remove()
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notif.js') }}"></script>
+{% endblock %}
+
+
+{% block content %}
+    {% block page_content %}
+
+    {% endblock %}
+{% endblock %}

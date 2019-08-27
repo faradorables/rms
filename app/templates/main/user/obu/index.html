@@ -1,0 +1,283 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/obu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/template/auth.js') }}"></script>
+    <script>
+        _obu();
+    </script>
+{% endblock %}
+
+{% block page_content %}
+<main id="dashboard_index">
+  <div class="inmain_nav">
+    <div class="title">
+      <h1>OBU</h1>
+    </div>
+  </div>
+  <div class="_container">
+    <div class="_row">
+      <div class="col_10">
+        <div class="card dashboard_card">
+          <div class="col_2">
+            <h5 class="title"><i class="fa fa-user"></i>Total OBU</h5>
+            <h2 class="value" id="total_obu">-</h2>
+            <span class="_growth positive"><span>12</span>% increase</span>
+          </div>
+          <div class="col_2">
+            <h5 class="title"><i class="fa fa-user"></i>Total Registered OBU</h5>
+            <h2 class="value" id="total_active_obu">-</h2>
+            <span class="_growth positive"><span>12</span>% increase</span>
+          </div>
+          <div class="col_2">
+            <h5 class="title"><i class="fa fa-user"></i>Total User owned OBU</h5>
+            <h2 class="value" id="user_owned">-</h2>
+            <span class="_growth negative"><span>12</span>% decrease</span>
+          </div>
+          <div class="col_2">
+            <h5 class="title"><i class="fa fa-user"></i>Total Broken OBU</h5>
+            <h2 class="value last" id="non_active_obu">-</h2>
+            <span class="_growth negative"><span>12</span>% decrease</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="_row">
+      <div class="col_10">
+        <div class="card chart_card table_card _table_pagination">
+          <h5 class="title">
+            <i class="fas fa-microchip"></i>OBU
+            <div class="_filter">
+              <select id="showBy" onchange="showBy()" name="show" placeholder="Role">
+                <option value="all" >All</option>
+                <option value="owned">Owned by User</option>
+                <option value="active">Available</option>
+                <option value="nonactive">Non-Active</option>
+              </select>
+              <form>
+                <input type="text" placeholder="Search user">
+                <button type="submit">Search</button>
+              </form>
+            </div>
+          </h5>
+          <div class="table" id="data_body"></div>
+          <div class="_pagination _bottom_pagination">
+            <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+            <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+            <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="obuForm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Add OBU
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col_10" style="padding-top: 0;">
+            <div class="card chart_card table_card _table_pagination">
+                <div class="_register">
+                  <!-- <form> -->
+                    <input id="excel" type="file" name="excel" placeholder="Excel File" accept=".xlsx, .xls, .csv">
+                    <input id="uid" name="uid" type="text" placeholder="UID">
+                    <input id="pin" name="pin" type="number" placeholder="PIN">
+                    <button class="button_submit" data-dismiss="modal" onclick="add_obu()">Submit</button>
+                  <!-- </form> -->
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="obuPassword" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Verify Password
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col_10" style="padding-top: 0;">
+            <div class="card chart_card table_card _table_pagination">
+                <div class="_register">
+                  <!-- <form> -->
+                  <div class="pass">
+                      <input id="password" name="password" type="password" placeholder="Input Your Password..">
+                      <input type="checkbox" id="view_pass">
+                      <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                  </div>
+                    <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form()">Verify</button>
+                  <!-- </form> -->
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="obuDetail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          User Detail
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="header">
+          <div class="profilePicture"></div>
+          <div class="detail">
+            <h3 id="detail_name"></h3>
+            <p id="detail_phone"></p>
+            <p id="detail_email">-</p>
+          </div>
+        </div>
+        <div class="_row">
+          <div class="card dashboard_card">
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-wallet"></i>Total Wallet</h5>
+              <h2 class="value" id="user_total_wallet">-</h2>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-tag"></i>Total Point</h5>
+              <h2 class="value" id="user_total_point">-</h2>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fas fa-microchip"></i>Total OBU</h5>
+              <h2 class="value" id="user_total_obu">-</h2>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fas fa-handshake"></i>Total Transactions</h5>
+              <h2 class="value last" id="user_total_transactions">-</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col_10" style="padding-top: 0;">
+            <div class="card chart_card table_card">
+              <h5 class="title">
+                List of OBUs
+              </h5>
+              <div class="table" id="data_body2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="obuUnitDetail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Unit Detail
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col_10" style="padding-top: 0;">
+            <div class="card chart_card table_card">
+              <h5 class="modal-title">Photos</h5>
+              <div class="header">
+                <div class="detail">
+                  <div class="col_6">
+                  <div class="row">
+                    <div class="column">
+                      <a target="_blank" href="#back_plate">
+                      <img id="back_plate" alt="Back Plate"></a>
+                      <p style="text-align:center">Back Plate</p>
+                    </div>
+                    <div class="column">
+                      <img id="back_vehicle" alt="Back Vehicle">
+                      <p style="text-align:center"> Back Vehicle</p>
+                    </div>
+                    <div class="column">
+                      <img id="front_plate" alt="Front Plate">
+                      <p style="text-align:center"> Front Plate</p>
+                    </div>
+                    <div class="column">
+                      <img id="front_vehicle" alt="Front Vehicle">
+                      <p style="text-align:center"> Front Vehicle</p>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col_10" style="padding-top: 0;">
+            <div class="card chart_card table_card">
+              <h5 class="modal-title">Profile</h5><br>
+                <div class="header">
+                  <div class="detail">
+                    <table>
+                      <tr>
+                        <th>OBU ID</th>
+                        <th>Plate ID</th>
+                        <th>Vehicle Type</th>
+                        <th>Vehicle Brand</th>
+                        <th>Vehicle Series</th>
+                        <th>Vehicle Model</th>
+                        <th>Vehicle Color</th>
+                      </tr>
+                      <tr>
+                        <td id="detail_id"></td>
+                        <td id="plate_id"></td>
+                        <td id="vehicle_type"></td>
+                        <td id="vehicle_brand"></td>
+                        <td id="vehicle_series"></td>
+                        <td id="vehicle_model"></td>
+                        <td id="vehicle_color"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,127 @@
+/**
+ * Developed by ION Developer Team
+ * URL : https://ion.eco
+
+$primary-color: #392c70
+$secondary-color: lighten($primary-color, 30%)
+$netral: transparent
+$light: #fff
+$semilight: darken($light, 5%)
+$dark: #222
+$danger: #8b0000
+$netral: transparent
+
+$primary-font: 'Futura Light'
+$secondary-font: 'Futura Medium'
+$third-font: 'Futura Bold'
+
+nav#mainHeader
+  background: $light
+  display: flex
+  justify-content: space-between
+  height: 60px
+  width: 100%
+  position: fixed
+  left: 0
+  top: 0
+  z-index: 12
+  padding: 0
+  box-shadow: 0 0 8px -2px $dark
+  >div.companyLogo
+    display: flex
+    height: 100%
+    margin-left: 10px
+    justify-content: left
+    align-items: center
+    background-color: $light
+    >img
+      height: 60%
+      margin-right: 10px
+    >p
+      font-family: $secondary-font
+      color: $primary-color
+      margin: 0
+      font-size: 20px
+      >b
+        font-family: $primary-font
+  >div.nav-right
+    display: flex
+    margin-right: 10px
+    >a
+      text-decoration: none
+      color: $dark
+      display: flex
+      justify-content: center
+      align-items: center
+      div.profilePicture
+        width: 50px
+        height: 50px
+        background-image: url("/static/src/icon/pp.png")
+        background-size: cover
+        background-position: center
+        background-color: #fff
+      >p
+        margin: 0
+        margin-right: 10px
+        font-family: $secondary-font
+        color: $primary-color
+
+nav.sidenav, div.sidenav2, div.sidenav3
+  position: fixed
+  z-index: 11
+  width: 200px
+  height: 100%
+  top: 0
+  left: 0
+  background: $light
+  padding-top: 60px
+  overflow: hidden
+  box-shadow: 0 0 14px -6px
+  >div
+    overflow: hidden
+    position: relative
+  >div > a, > a
+    text-decoration: none
+    font-family: $primary-font
+    color: $primary-color
+    display: flex
+    padding: 15px 10px
+    align-items: center
+    cursor: pointer
+    &:nth-child(1)
+      border-top: none
+    >i
+      margin-right: 15px
+      font-size: 20px
+    >p
+      margin: 0
+      font-size: 15px
+    &:hover, &.active
+      background-color: $primary-color
+      // font-family: $primary-font
+      color: $light
+    &#nav_max
+      position: absolute
+      width: 100%
+      bottom: 0
+      display: flex
+      justify-content: flex-end
+      background-color: $primary-color
+      font-family: $primary-font
+      color: $light
+    &.sidenav2_close
+      background-color: $primary-color
+      color: $light
+    &.sidenav3_close
+      background-color: $primary-color
+      color: $light
+      // &:hover
+
+
+div.sidenav2
+  z-index: 10
+  transition: 300ms
+
+div.sidenav3
+  z-index: 10
+  transition: 300ms
