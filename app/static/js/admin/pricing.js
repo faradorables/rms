@@ -1,5 +1,5 @@
 let _page, _limit, _total_data;
-var plaza_id;
+var price_id;
 
 function _users(){
   $(document).ready(function () {
@@ -100,10 +100,237 @@ function _pricing_append(data, i){
     '<td>'+"Golongan " + data.vehicle_class + '</td>' +
     '<td>'+"Rp." + data.price + '</td>' +
     '<td>'+
-    '<a><i class="fas fa-info-circle"></i></a>' +
+    '<a onclick="editPrice('+data.id+')"><i class="fas fa-edit"></i></a>' +
     '<a><i class="fas fa-ban"></i></a>' +
     '</td>'+
     '</tr>'+
     '</table>'
   )
+}
+
+function addpriceForm(){
+  _loading(0);
+  _plaza_list();
+  _vehicle_list();
+  $('#addpriceForm').modal('show');
+}
+
+$('#addpriceForm').on('shown.bs.modal', function () {
+  $(this).css({'padding': '0'})
+})
+
+function pricePassword(){
+  _loading(0);
+  $('#pricePassword').modal('show');
+}
+
+$('#pricePassword').on('shown.bs.modal', function () {
+  $(this).css({'padding': '0'})
+})
+
+function redirect_to_form() {
+  var password = document.getElementById("password").value;
+  _loading(1);
+  $.post('/api/v1/auth/verif_pin',{
+    'id': userData['id'],
+    'token': userData['token'],
+    'pin': password
+  }, function(e){
+    console.log(userData['id']);
+      if(e['status'] === '00'){
+          add_price();
+      }else{
+          nav_href('BUJT');
+          notif('danger', 'Authentication failed', e.message)
+      }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+}
+
+function redirect_to_form2() {
+  var password = document.getElementById("password").value;
+  _loading(1);
+  $.post('/api/v1/auth/verif_pin',{
+    'id': userData['id'],
+    'token': userData['token'],
+    'pin': password
+  }, function(e){
+    console.log(userData['id']);
+      if(e['status'] === '00'){
+          edit_price();
+      }else{
+          nav_href('BUJT');
+          notif('danger', 'Authentication failed', e.message)
+      }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+}
+
+function _plaza_list(){
+  _loading(1);
+  $.post('/api/v1/ams/list_plaza',{
+      'id': userData['id'],
+      'token': userData['token'],
+      'status': 0,
+  }, function (e) {
+    let i;
+    if(e['status'] === '00'){
+      if(e.data.length > 0){
+        for(i=0; i < e.data.length; i++){
+          _plazalist_append(e.data[i], i);
+        }
+      }
+    }else{
+      notif('danger', 'System Error!', e.message);
+    }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+}
+
+function _plazalist_append(data){
+  $('#plaza_in').append(
+    '<option value="'+ data.plaza_id +'">'+ data.name +'</option>'
+  )
+  $('#plaza_out').append(
+    '<option value="'+ data.plaza_id +'">'+ data.name +'</option>'
+  )
+}
+
+function _vehicle_list(){
+  _loading(1);
+  $.post('/api/v1/ams/vehicle_class',{
+      'id': userData['id'],
+      'token': userData['token'],
+      'status': 0,
+  }, function (e) {
+    let i;
+    if(e['status'] === '00'){
+      if(e.data.length > 0){
+        for(i=0; i < e.data.length; i++){
+          _vehiclelist_append(e.data[i], i);
+        }
+      }
+    }else{
+      notif('danger', 'System Error!', e.message);
+    }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+}
+
+function _vehiclelist_append(data){
+  $('#vehicle_class').append(
+    '<option value="'+ data.id +'">'+ data.name +'</option>'
+  )
+}
+
+function add_price(){
+  var plaza_in = document.getElementById("plaza_in").value;
+  var plaza_out = document.getElementById("plaza_out").value;
+  var vehicle_class = document.getElementById("vehicle_class").value;
+  var price = document.getElementById("price").value;
+  _loading(1);
+  $.post('/api/v1/add_price',{
+      'id': userData['id'],
+      'token': userData['token'],
+      'plaza_in_id': plaza_in,
+      'plaza_out_id': plaza_out,
+      'vehicle_class_id': vehicle_class,
+      'price': price
+
+  }, function (e) {
+    if(e['status'] === '00'){
+      console.log(e['messages'])
+      nav_href('pricing');
+      notif('success', 'Success!', e['messages']);
+
+    }else{
+      notif('danger', 'System Error!', e['messages']);
+    }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+
+}
+
+function editPrice(id){
+  _loading(1);
+  _plaza_list();
+  _vehicle_list()
+  $('#editPrice').modal('show');
+  $.post('/api/v1/ams/pricedetail',{
+      'id': userData['id'],
+      'token': userData['token'],
+      'status': 0,
+      'price_id': id,
+  }, function (e) {
+    let i;
+      if(e['status'] === '00'){
+        if (id > 0){
+          document.getElementById("plaza_in").value = e.id.plaza_in_id;
+          document.getElementById("plaza_out").value = e.id.plaza_out_id;
+          document.getElementById("vehicle_class").value = e.id.vehicle_class;
+          document.getElementById("price2").value = e.id.price;
+          price_id = id;
+          console.log(id)
+        }else{
+          notif('danger', 'System Error!', 'user tidak terdaftar')
+        }
+    }else{
+      notif('danger', 'System Error!', e.message);
+    }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+}
+
+$('#editPrice').on('shown.bs.modal', function () {
+  $(this).css({'padding': '0'})
+})
+
+function edit_price(){
+  var plaza_in = document.getElementById("plaza_in").value;
+  var plaza_out = document.getElementById("plaza_out").value;
+  var vehicle_class = document.getElementById("vehicle_class").value;
+  var price = document.getElementById("price2").value;
+  _loading(1);
+  $.post('/api/v1/edit_price',{
+      'id': userData['id'],
+      'token': userData['token'],
+      'plaza_in': plaza_in,
+      'plaza_out': plaza_out,
+      'vehicle_class': vehicle_class,
+      'price': price,
+      'price_id': price_id
+
+  }, function (e) {
+    if(e['status'] === '00'){
+      console.log(e['messages'])
+      _pricing_list(_page);
+      notif('success', 'Success!', e['messages']);
+
+    }else{
+      notif('danger', 'System Error!', e['messages']);
+    }
+  }).fail(function(){
+    notif('danger', 'System Error!', 'Mohon kontak IT Administrator');
+  }).done(function(){
+    _loading(0);
+  });
+
 }

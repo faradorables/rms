@@ -64,7 +64,19 @@
                 </form>
               </div>
             </h5>
-            <div class="table" id="data_body"></div>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Plaza Name</th>
+                    <th>Plaza Address</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Option</th>
+                  </tr>
+                </thead>
+              <tbody id="data_body"></tbody>
+            </table>
             <div class="_pagination _bottom_pagination">
               <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
               <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
@@ -97,6 +109,7 @@
                     <p id="detail_address"></p>
                     <p id="detail_client">-</p>
                   </div>
+                  <button class="add" onclick="editPlazaForm()" style="margin-right:10px"><i class="fas fa-edit"></i>Edit Plaza</a>
                 </div>
               </div>
             </div>
@@ -126,7 +139,7 @@
               <div class="card chart_card table_card">
                 <h5 class="title">
                   Plaza Lane
-                  <a class="button" onclick="addLaneForm()"><i class="fas fa-plus"></i>Add Lane</a>
+                  <button class="add" onclick="addLaneForm()"><i class="fas fa-plus"></i>Add Lane</a>
                 </h5>
                 <table class="table table-hover">
                     <thead>
@@ -134,6 +147,7 @@
                         <th>No.</th>
                         <th>Lane Name</th>
                         <th>Lane Type</th>
+                        <th>Option</th>
                       </tr>
                     </thead>
                   <tbody id="data_lane"></tbody>
@@ -167,6 +181,7 @@
                         <th>No.</th>
                         <th>Lane Name</th>
                         <th>Lane Type</th>
+                        <th></th>
                       </tr>
                     </thead>
                   <tbody id="data_lane_all"></tbody>
@@ -267,6 +282,134 @@
                         <option value="" disabled selected>Select Type..</option>
                       </select>
                       <button class="button_submit" data-dismiss="modal" onclick="add_lane()">Submit</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editPlazaForm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Plaza
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                      <input id="name2" name="name2" type="text" placeholder="Plaza Name">
+                      <input id="address2" name="address2" type="text" placeholder="Plaza Address">
+                      <input id="image2" type="file" name="image2" placeholder="Photo.." accept=".JPG, .JPEG, .PNG">
+                      <input id="latitude2" name="latitude2" type="text" placeholder="Plaza Latitude">
+                      <input id="longitude2" name="longitude2" type="text" placeholder="Plaza Longitude">
+                      <button class="button_submit" data-dismiss="modal" onclick="plazaPassword()">Submit</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="plazaPassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Verify Password
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                    <div class="pass">
+                        <input id="password" name="password" type="password" placeholder="Input Your Password..">
+                        <input type="checkbox" id="view_pass">
+                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                    </div>
+                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form3()">Verify</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editLaneForm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Lane
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                      <input id="lane_name2" name="lane_name2" type="text" placeholder="Lane Name">
+                      <select id="role_body2" name="role2" placeholder="Role" style="width:100%; margin-bottom:10px">
+                        <option value="" disabled selected>Select Type..</option>
+                      </select>
+                      <button class="button_submit" data-dismiss="modal" onclick="lanePassword()">Submit</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="lanePassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Verify Password
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                    <div class="pass">
+                        <input id="password2" name="password2" type="password" placeholder="Input Your Password..">
+                        <input type="checkbox" id="view_pass">
+                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                    </div>
+                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form2()">Verify</button>
                     <!-- </form> -->
                   </div>
               </div>

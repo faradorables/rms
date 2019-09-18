@@ -459,7 +459,7 @@ class Rdb_Plaza(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
-    address = db.Column(db.String(128))
+    address = db.Column(db.String(512))
     image = db.Column(db.String(128))
     added_time = db.Column(db.DateTime(), default=datetime.now())
     status = db.Column(db.Boolean, default=True)
@@ -499,6 +499,17 @@ class Rdb_Plaza(db.Model):
             })
         return response
 
+    def _list_append(self, _client_id):
+        response = []
+        client = Rdb_Client.query.filter_by(ion_id=_client_id).first()
+        _list = Rdb_Plaza.query.filter_by(client_id=client.id, status=True).all()
+        for i in _list:
+            response.append({
+                'plaza_id': i.id,
+                'name': i.name
+            })
+        return response
+
     def _insert(self, _name, _client_id, _latitude, _longitude, _address, _image):
         _plaza = Rdb_Plaza()
         _plaza.name=_name
@@ -522,8 +533,24 @@ class Rdb_Plaza(db.Model):
             response['id'] = plaza_id
             response['name'] = plaza.name
             response['address'] = plaza.address
+            response['latitude'] = plaza.latitude
+            response['longitude'] = plaza.longitude
             response['client'] = client.name
             response['total_lane'] = total_lane
+        return response
+
+    def _update(self, _id, _name, _client_id, _latitude, _longitude, _address, _image): #untuk membaca data kebutuhan read data untuk di update nantinya
+        _plaza = Rdb_Plaza.query.filter_by(id=_id, status=True).first()
+        _plaza.name=_name
+        _plaza.client_id=_client_id
+        _plaza.latitude=_latitude
+        _plaza.longitude=_longitude
+        _plaza.address=_address
+        _plaza.image=_image
+        db.session.add(_plaza)
+        db.session.commit()
+        response = Rdb_Plaza()._data(_plaza.id)
+        print(_plaza.id)
         return response
 
 class Rdb_Lane_Type(db.Model):
@@ -589,6 +616,7 @@ class Rdb_Lane(db.Model):
         for i in _list:
             lane_type = Rdb_Lane_Type.query.filter_by(id=i.lane_type_id).first()
             response.append({
+                'id':i.id,
                 'lane_name': i.name,
                 'lane_type': lane_type.name
             })
@@ -613,6 +641,18 @@ class Rdb_Lane(db.Model):
             response['id'] = _lane_id
             response['name'] = lane.name
             response['type'] = type.name
+            response['type_id'] = type.id
+        return response
+
+    def _update(self, _id, _name, _lane_type_id, _plaza_id):
+        _lane = Rdb_Lane.query.filter_by(id=_id, status=True).first()
+        _lane.name=_name
+        _lane.lane_type_id=_lane_type_id
+        _lane.plaza_id=_plaza_id
+        db.session.add(_lane)
+        db.session.commit()
+        response = Rdb_Lane()._data(_lane.id)
+        print(_lane.id)
         return response
 
 class Rdb_Price(db.Model):
@@ -663,6 +703,7 @@ class Rdb_Price(db.Model):
                 plaza_in = Rdb_Plaza.query.filter_by(id=i.plaza_in_id).first()
                 if plaza_in.client_id == client_id:
                     response.append({
+                        'id': i.id,
                         'plaza_in': plaza_in.name,
                         'price': i.price,
                         'vehicle_class': i.vehicle_class_id
@@ -675,12 +716,113 @@ class Rdb_Price(db.Model):
                 if plaza_in.client_id == client_id:
                     plaza_out = Rdb_Plaza.query.filter_by(id=i.plaza_out_id).first()
                     response.append({
+                        'id': i.id,
                         'plaza_in': plaza_in.name,
                         'plaza_out': plaza_out.name,
                         'price': i.price,
                         'vehicle_class': i.vehicle_class_id
                     })
         return response
+
+    def _insert(self, plaza_in_id, plaza_out_id, vehicle_class_id, price):
+        _price = Rdb_Price()
+        _price.plaza_in_id=plaza_in_id
+        _price.plaza_out_id=plaza_out_id
+        _price.vehicle_class_id=vehicle_class_id
+        _price.price=price
+        db.session.add(_price)
+        db.session.commit()
+        response = Rdb_Price()._data(_price.id)
+        return response
+
+    def _data(self, price_id): #untuk membaca data user kebutuhan transaksi
+        response = {}
+        price = Rdb_Price.query.filter_by(id=price_id).first()
+        plaza_in = Rdb_Plaza.query.filter_by(id=price.plaza_in_id).first()
+        plaza_out = Rdb_Plaza.query.filter_by(id=price.plaza_out_id).first()
+        print(price)
+        if price is not None:
+            response['id'] = price_id
+            response['plaza_in'] = plaza_in.name
+            response['plaza_in_id'] = plaza_in.id
+            response['plaza_out'] = plaza_out.name
+            response['plaza_out_id'] = plaza_out.id
+            response['vehicle_class'] = price.vehicle_class_id
+            response['price'] = price.price
+        return response
+
+    def _update(self, _id, plaza_in, plaza_out, vehicle_class, price): #untuk membaca data kebutuhan read data untuk di update nantinya
+        _price = Rdb_Price.query.filter_by(id=_id, status=True).first()
+        _price.plaza_in_id=plaza_in
+        _price.plaza_out_id=plaza_out
+        _price.vehicle_class_id=vehicle_class
+        _price.price=price
+        db.session.add(_price)
+        db.session.commit()
+        response = Rdb_Price()._data(_price.id)
+        return response
+
+class Rdb_Vehicle_Class(db.Model):
+    __bind_key__ = 'toll'
+    __tablename__ = 'vehicle_class'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    added_time = db.Column(db.DateTime(), default=datetime.now())
+    status = db.Column(db.Boolean, default=True)
+
+    price = db.relationship('Rdb_Price', backref='role', lazy='dynamic')
+
+    @staticmethod
+    def _insert_data():
+        values = ['Golongan 1', 'Golongan 2']
+        for v in values:
+            _class = Rdb_Vehicle_Class()
+            _class.name = v
+            db.session.add(_class)
+            db.session.commit()
+
+    def _list(self):
+        response = []
+        vehicle = Rdb_Vehicle_Class.query.all()
+        for u in vehicle:
+            response.append({
+                'id': u.id,
+                'name': u.name
+            })
+        return response
+
+class Rdb_User(UserMixin, db.Model):
+    __bind_key__='toll'
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    username = db.Column(db.String(64))
+    password = db.Column(db.String(128))
+    email = db.Column(db.String(64), unique=True, index=True)
+    phone_number = db.Column(db.String(64), unique=True, index=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    added_time = db.Column(db.DateTime(), default=datetime.now())
+    status = db.Column(db.Boolean, default=True)
+
+    @staticmethod
+    def _insert_data():
+        values = [
+            {"name" : "CMNP", "username": "cmnp2019", "password" : "abcdefghij", "address" : "Jalan username", "email" : "citra_marga@cmnp.com", "phone_number": "02178989222", "client_id": 1, "role_id" : 1},
+            {"name" : "JM", "username": "jasamarga2019", "password" : "jasamarga", "address" : "Jalan jasamarga", "email" : "jasa_marga@cmnp.com", "phone_number": "0213332092", "client_id": 2, "role_id" : 1}
+        ]
+        for v in values:
+            _user = Rdb_User()
+            _user.name = v['name']
+            _user.username = v['username']
+            _user.password = v['password']
+            _user.email = v['email']
+            _user.address = v['address']
+            _user.phone_number = v['phone_number']
+            _user.client_id = v['client_id']
+            _user.role_id = v['role_id']
+            db.session.add(_user)
+            db.session.commit()
 
 class Ion_Role(db.Model):
     __bind_key__ = 'users'

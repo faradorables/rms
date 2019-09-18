@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from ..utils import send_notif
 from datetime import datetime, timedelta
 from . import auth
-from ..models import User, db, Ion_User, Rdb_Plaza, Rdb_Client, Rdb_Lane
+from ..models import User, db, Ion_User, Rdb_Plaza, Rdb_Client, Rdb_Lane, Rdb_Price
 from .forms import LoginForm, RegistrationForm, PasswordResetRequestForm, PasswordResetForm, ChangePasswordForm, EmailForm
 from ..email import send_email
 import calendar, os, re
@@ -99,6 +99,25 @@ def _add_lane():
     else:
         return redirect(url_for('.index'))
 
+@auth.route('/api/v1/add_price', methods=['GET', 'POST'])
+@csrf.exempt
+def _add_price():
+    if request.method == "POST":
+        response = {}
+        apidata = request.form
+        print(apidata)
+        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
+        if cur_user is not None and cur_user.verify_token(apidata['token']):
+            Rdb_Price()._insert(apidata['plaza_in_id'],apidata['plaza_out_id'],apidata['vehicle_class_id'], apidata['price'])
+            response['status'] = '00'
+            response['messages'] = 'success'
+        else:
+            response['status'] = '50'
+            response['messages'] = 'user tidak terverifikasi'
+        return jsonify(response)
+    else:
+        return redirect(url_for('.index'))
+
 @auth.route('/api/v1/edit_admin', methods=['GET', 'POST'])
 @csrf.exempt
 def _edit_admin():
@@ -117,6 +136,65 @@ def _edit_admin():
             else:
                 response['status'] = '50'
                 response['messages'] = 'email sudah ada yang pakai'
+        else:
+            response['status'] = '50'
+            response['messages'] = 'user tidak terverifikasi'
+        return jsonify(response)
+    else:
+        return redirect(url_for('.index'))
+
+@auth.route('/api/v1/edit_price', methods=['GET', 'POST'])
+@csrf.exempt
+def _edit_price():
+    if request.method == "POST":
+        response = {}
+        apidata = request.form
+        print(apidata)
+        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
+        # response['id'] = User()._data(apidata['id'])
+        if cur_user is not None and cur_user.verify_token(apidata['token']):
+            Rdb_Price()._update(apidata['price_id'],apidata['plaza_in'],apidata['plaza_out'],apidata['vehicle_class'],apidata['price'])
+            response['status'] = '00'
+            response['messages'] = 'success'
+        else:
+            response['status'] = '50'
+            response['messages'] = 'user tidak terverifikasi'
+        return jsonify(response)
+    else:
+        return redirect(url_for('.index'))
+
+@auth.route('/api/v1/edit_plaza', methods=['GET', 'POST'])
+@csrf.exempt
+def _edit_plaza():
+    if request.method == "POST":
+        response = {}
+        apidata = request.form
+        print(apidata)
+        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
+        client = Rdb_Client.query.filter_by(ion_id=apidata['id']).first()
+        if cur_user is not None and cur_user.verify_token(apidata['token']):
+            Rdb_Plaza()._update(apidata['plaza_id'],apidata['name'],client.id,apidata['latitude'],apidata['longitude'],apidata['address'],apidata['image'])
+            response['status'] = '00'
+            response['messages'] = 'success'
+        else:
+            response['status'] = '50'
+            response['messages'] = 'user tidak terverifikasi'
+        return jsonify(response)
+    else:
+        return redirect(url_for('.index'))
+
+@auth.route('/api/v1/edit_lane', methods=['GET', 'POST'])
+@csrf.exempt
+def _edit_lane():
+    if request.method == "POST":
+        response = {}
+        apidata = request.form
+        print(apidata)
+        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
+        if cur_user is not None and cur_user.verify_token(apidata['token']):
+            Rdb_Lane()._update(apidata['lane_id'],apidata['name'],apidata['lanetype'],apidata['plaza_id'])
+            response['status'] = '00'
+            response['messages'] = 'success'
         else:
             response['status'] = '50'
             response['messages'] = 'user tidak terverifikasi'

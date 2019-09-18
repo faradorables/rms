@@ -9,10 +9,10 @@
 
 {% block scripts %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/admin/bujt.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/pricing.js') }}"></script>
     <script src="{{ url_for('static', filename='js/template/auth.js') }}"></script>
     <script>
-        bujtPassword();
+        addpriceForm();
     </script>
 {% endblock %}
 
@@ -23,12 +23,12 @@
       <h1>Add Toll Client</h1>
     </div>
   </div>
-  <div class="modal fade" id="bujtForm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="addpriceForm" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" style="width:50%; margin-left:300px">
         <div class="modal-header">
           <h5 class="modal-title">
-            Add Client
+            Add Price
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -40,14 +40,17 @@
               <div class="card chart_card table_card _table_pagination">
                   <div class="_register">
                     <!-- <form> -->
-                      <input id="name" name="name" type="text" placeholder="Client Name..">
-                      <input id="phone" name="phone" type="phone" placeholder="Phone Number..">
-                      <input id="email" name="email" type="email" placeholder="Client E-mail..">
-                      <select id="trxtype" name="trxtype">
-                        <option value="" disabled selected>Select Transaction Type..</option>
+                      <select id="plaza_in" name="plaza_in">
+                        <option value="" disabled selected>Select Plaza In..</option>
                       </select>
-                      <input id="pin" name="pin" type="number" placeholder="PIN..">
-                      <button class="button_submit" data-dismiss="modal" onclick="add_client()">Submit</button>
+                      <select id="plaza_out" name="plaza_out">
+                        <option value="" disabled selected>Select Plaza Out..</option>
+                      </select>
+                      <select id="vehicle_class" name="vehicle_class">
+                        <option value="" disabled selected>Select Vehicle Class..</option>
+                      </select>
+                      <input id="price" name="price" type="number" placeholder="Price.." style="width:50%">
+                      <button class="button_submit" data-dismiss="modal" onclick="pricePassword()" style="margin-top:75px">Submit</button>
                     <!-- </form> -->
                   </div>
               </div>
@@ -57,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="bujtPassword" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="pricePassword" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

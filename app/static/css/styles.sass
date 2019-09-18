@@ -427,6 +427,34 @@ div#mainBody
       align-items: center
     &.table_card
       padding: 25px 10px
+      button.add
+        position: absolute
+        right: 30px
+        padding: 10px
+        background-color: $primary-color
+        cursor: pointer
+        color: $light
+        transition: 300ms
+        font-size: 20px
+        &:hover
+          background-color: $secondary-color
+      a
+        position: relative
+        display: inline-grid
+        justify-content: center
+        align-items: center
+        background-color: transparent
+        width: 30px
+        min-height: 36px
+        color: #bbb
+        cursor: pointer
+        transition: 300ms
+        font-size: 20px
+        &:hover
+          color: darken(#eee, 70%)
+          font-weight: bolder
+          background: darken(#eee, 10%)
+          border-radius: 100%
       &._table_pagination
         padding-bottom: 50px
       h5.title
@@ -688,6 +716,7 @@ div._buttonadd
   margin-left: 10px
   position: absolute
 .modal
+  overflow: auto !important
   .modal-dialog
     width: 90%
     .modal-header

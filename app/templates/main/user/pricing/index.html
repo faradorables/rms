@@ -288,5 +288,74 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="editPrice" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="width:50%; margin-left:300px">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Price
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                      <select id="plaza_in" name="plaza_in">
+                        <option value="" disabled selected>Select Plaza In..</option>
+                      </select>
+                      <select id="plaza_out" name="plaza_out">
+                        <option value="" disabled selected>Select Plaza Out..</option>
+                      </select>
+                      <select id="vehicle_class" name="vehicle_class">
+                        <option value="" disabled selected>Select Vehicle Class..</option>
+                      </select>
+                      <input id="price2" name="price2" type="number" placeholder="Price.." style="width:50%">
+                      <button class="button_submit" data-dismiss="modal" onclick="pricePassword()" style="margin-top:75px">Submit</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="pricePassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Verify Password
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card _table_pagination">
+                  <div class="_register">
+                    <!-- <form> -->
+                    <div class="pass">
+                        <input id="password" name="password" type="password" placeholder="Input Your Password..">
+                        <input type="checkbox" id="view_pass">
+                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
+                    </div>
+                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form2()">Verify</button>
+                    <!-- </form> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 {% endblock %}
