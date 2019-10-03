@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for, abort, current_app, \
     send_from_directory, flash
 from flask_login import login_required, current_user
-from ..models import db, Ion_User, Ion_Wallet, Rdb_Transaction_Type, Rdb_Plaza, Rdb_Lane, Rdb_Lane_Type, Rdb_Price, Rdb_Client, Rdb_Vehicle_Class
+from ..models import db, User, Role, Hop_User, Hop_Outlet
 from werkzeug.utils import secure_filename
 import pymongo, requests, calendar, os, json
 from datetime import datetime
@@ -28,6 +28,78 @@ def allowed_file(filename):
 # ==============================================================================
 
 # THIS IS VIEWS FOR ADMIN PAGE
+@api.route('/admin', methods=['POST', 'GET'])
+@csrf.exempt
+def _api_admins():
+    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
+    # user_log('/', ip_list)
+    if request.method == 'POST':
+        apidata = request.form
+        app = current_app._get_current_object()
+        print(apidata)
+        response = {}
+        user = User.query.filter_by(id=apidata['id']).first()
+        if user is not None and user.verify_token(apidata['token']):
+            if int(apidata['status']) == 0:
+                response['data'] = User()._list(page=int(apidata['page']))
+                response['count_admin'] = User()._count()
+                response['admin_detail'] = User()._data(apidata['id'])
+                response['status'] ='00'
+        else:
+            response['status'] = '50'
+            response['message'] = 'Your credential are invalid.'
+        return jsonify(response)
+    else:
+        return redirect(url_for('main.index'))
+
+@api.route('/role', methods=['POST', 'GET'])
+@csrf.exempt
+def _api_roles():
+    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
+    # user_log('/', ip_list)
+    if request.method == 'POST':
+        apidata = request.form
+        app = current_app._get_current_object()
+        print(apidata)
+        response = {}
+        user = User.query.filter_by(id=apidata['id']).first()
+        if user is not None and user.verify_token(apidata['token']):
+            if int(apidata['status']) == 0:
+                response['data'] = Role()._list()
+                response['status'] = '00'
+        else:
+            response['status'] = '50'
+            response['message'] = 'Your credential are invalid.'
+        return jsonify(response)
+    else:
+        return redirect(url_for('main.index'))
+
+@api.route('/detail', methods=['POST', 'GET'])
+@csrf.exempt
+def _api_detail():
+    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
+    # user_log('/', ip_list)
+    if request.method == 'POST':
+        apidata = request.form
+        app = current_app._get_current_object()
+        print(apidata)
+        response = {}
+        user = User.query.filter_by(id=apidata['id_admin']).first()
+        if user is not None and user.verify_token(apidata['token']):
+            if int(apidata['status']) == 0:
+                response['id'] = User()._data(_id=(apidata['id']))
+                response['status'] = '00'
+                response['message'] = 'Sukses'
+            elif int(apidata['status']) == 1:
+                response['status'] = '00'
+                response['message'] = 'Sukses'
+        else:
+            response['status'] = '50'
+            response['message'] = 'Your credential are invalid.'
+        return jsonify(response)
+    else:
+        return redirect(url_for('main.index'))
+
 @api.route('/users', methods=['POST', 'GET'])
 @csrf.exempt
 def _api_users():
@@ -38,13 +110,11 @@ def _api_users():
         app = current_app._get_current_object()
         print(apidata)
         response = {}
-        user = Ion_User.query.filter_by(id=apidata['id'], role_id=2).first()
+        user = User.query.filter_by(id=apidata['id']).first()
         if user is not None and user.verify_token(apidata['token']):
             if int(apidata['status']) == 0:
-                response['data'] = Rdb_Plaza()._list(page=int(apidata['page']), _client_id=apidata['id'])
-                response['count_user'] = Ion_User()._count(_client_id=apidata['id'])
-                response['total_wallet'] = Ion_Wallet()._check(_id=apidata['id'])
-                response['total_trx'] = Rapilog()._count(client_id=apidata['id'])
+                response['data'] = Hop_User()._list(page=int(apidata['page']))
+                response['count_user'] = Hop_User()._count()
                 response['status'] = '00'
         else:
             response['status'] = '50'
@@ -53,9 +123,9 @@ def _api_users():
     else:
         return redirect(url_for('main.index'))
 
-@api.route('/pricing', methods=['POST', 'GET'])
+@api.route('/outlet', methods=['POST', 'GET'])
 @csrf.exempt
-def _api_pricing():
+def _api_outlet():
     # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
     # user_log('/', ip_list)
     if request.method == 'POST':
@@ -63,14 +133,12 @@ def _api_pricing():
         app = current_app._get_current_object()
         print(apidata)
         response = {}
-        user = Ion_User.query.filter_by(id=apidata['id'], role_id=2).first()
-        client = Rdb_Client.query.filter_by(ion_id=apidata['id']).first()
+        user = User.query.filter_by(id=apidata['id']).first()
         if user is not None and user.verify_token(apidata['token']):
             if int(apidata['status']) == 0:
-                response['data'] = Rdb_Price()._list(page=int(apidata['page']), client_id=client.id)
-                response['count_user'] = Ion_User()._count(_client_id=apidata['id'])
-                response['total_wallet'] = Ion_Wallet()._check(_id=apidata['id'])
-                response['total_trx'] = Rapilog()._count(client_id=apidata['id'])
+                response['data'] = Hop_Outlet()._list(page=int(apidata['page']))
+                response['useroutlet'] = Hop_Outlet()._list_by_user(user_id=(apidata['user_id']))
+                response['count_user'] = Hop_Outlet()._count(user_id=(apidata['user_id']))
                 response['status'] = '00'
         else:
             response['status'] = '50'
@@ -89,10 +157,10 @@ def _api_userdetail():
         app = current_app._get_current_object()
         print(apidata)
         response = {}
-        user = Ion_User.query.filter_by(id=apidata['id'], role_id=2).first()
+        user = User.query.filter_by(id=apidata['id_admin']).first()
         if user is not None and user.verify_token(apidata['token']):
             if int(apidata['status']) == 0:
-                response['id'] = Rdb_Plaza()._data(plaza_id=(apidata['plaza_id']))
+                response['id'] = Hop_User()._data(_id=(apidata['user_id']))
                 response['status'] = '00'
         else:
             response['status'] = '50'
@@ -101,92 +169,9 @@ def _api_userdetail():
     else:
         return redirect(url_for('main.index'))
 
-@api.route('/lane', methods=['GET', 'POST'])
+@api.route('/outletdetail', methods=['POST', 'GET'])
 @csrf.exempt
-def _read_lane():
-    if request.method == 'POST':
-        response = {}
-        apidata = request.form
-        app = current_app._get_current_object()
-        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
-        if cur_user is not None and cur_user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['data'] = Rdb_Lane()._list(plaza_id=apidata['plaza_id'])
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-        else:
-            response['status'] = '50'
-            response['message'] = 'User tidak terverifikasi'
-        return jsonify(response)
-    return redirect("main.index", code=302)
-
-@api.route('/lanetype', methods=['GET', 'POST'])
-@csrf.exempt
-def _read_lanetype():
-    if request.method == 'POST':
-        response = {}
-        apidata = request.form
-        app = current_app._get_current_object()
-        cur_user = Ion_User.query.filter_by(id=apidata['id']).first()
-        if cur_user is not None and cur_user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['data'] = Rdb_Lane_Type()._list()
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-        else:
-            response['status'] = '50'
-            response['message'] = 'User tidak terverifikasi'
-        return jsonify(response)
-    return redirect("main.index", code=302)
-
-@api.route('/client_history', methods=['GET', 'POST'])
-@csrf.exempt
-def _read_client_history():
-    if request.method == 'POST':
-        response = {}
-        apidata = request.form
-        cur_user = User.query.filter_by(id=apidata['id']).first()
-        if cur_user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response = Rapilog()._list(apidata['client_id'], apidata['skip'])
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-            elif int(apidata['status']) == 1:
-                response['data'] = Rapilog()._data(apidata['_obu_uid'], apidata['_id'])
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-        else:
-            response['status'] = '50'
-            response['message'] = 'User tidak terverifikasi'
-        return jsonify(response)
-    return redirect("main.index", code=302)
-
-@api.route('/trx_log', methods=['GET', 'POST'])
-@csrf.exempt
-def _trx_log():
-    if request.method == 'POST':
-        response = {}
-        apidata = request.form
-        cur_user = User.query.filter_by(id=apidata['id']).first()
-        if cur_user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response = TransLog()._list_all(apidata['skip'])
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-            elif int(apidata['status']) == 1:
-                response['data'] = TransLog()._data_all(apidata['_id'])
-                response['status'] = '00'
-                response['message'] = 'Sukses'
-        else:
-            response['status'] = '50'
-            response['message'] = 'User tidak terverifikasi'
-        return jsonify(response)
-    return redirect("main.index", code=302)
-############################################################################
-
-@api.route('/bujt', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_bujt():
+def _api_outletdetail():
     # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
     # user_log('/', ip_list)
     if request.method == 'POST':
@@ -194,123 +179,10 @@ def _api_bujt():
         app = current_app._get_current_object()
         print(apidata)
         response = {}
-        user = User.query.filter_by(id=apidata['id']).first()
+        user = User.query.filter_by(id=apidata['id_admin']).first()
         if user is not None and user.verify_token(apidata['token']):
             if int(apidata['status']) == 0:
-                response['data'] = Ion_User()._list_bujt(page=int(apidata['page']))
-                response['count_user'] = Ion_User()._count()
-                response['total_wallet'] = Ion_Wallet()._total_wallet_client()
-                response['total_trx'] = Rapilog()._count()
-                response['status'] = '00'
-        else:
-            response['status'] = '50'
-            response['message'] = 'Your credential are invalid.'
-        return jsonify(response)
-    else:
-        return redirect(url_for('main.index'))
-
-@api.route('/trxtype', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_trxtype():
-    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
-    # user_log('/', ip_list)
-    if request.method == 'POST':
-        apidata = request.form
-        app = current_app._get_current_object()
-        print(apidata)
-        response = {}
-        user = User.query.filter_by(id=apidata['id']).first()
-        if user is not None and user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['data'] = Rdb_Transaction_Type()._list()
-                response['status'] = '00'
-        else:
-            response['status'] = '50'
-            response['message'] = 'Your credential are invalid.'
-        return jsonify(response)
-    else:
-        return redirect(url_for('main.index'))
-
-@api.route('/list_plaza', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_list_plaza():
-    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
-    # user_log('/', ip_list)
-    if request.method == 'POST':
-        apidata = request.form
-        app = current_app._get_current_object()
-        print(apidata)
-        response = {}
-        user = Ion_User.query.filter_by(id=apidata['id']).first()
-        if user is not None and user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['data'] = Rdb_Plaza()._list_append(_client_id=apidata['id'])
-                response['status'] = '00'
-        else:
-            response['status'] = '50'
-            response['message'] = 'Your credential are invalid.'
-        return jsonify(response)
-    else:
-        return redirect(url_for('main.index'))
-
-@api.route('/vehicle_class', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_vehicle_class():
-    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
-    # user_log('/', ip_list)
-    if request.method == 'POST':
-        apidata = request.form
-        app = current_app._get_current_object()
-        print(apidata)
-        response = {}
-        user = Ion_User.query.filter_by(id=apidata['id']).first()
-        if user is not None and user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['data'] = Rdb_Vehicle_Class()._list()
-                response['status'] = '00'
-        else:
-            response['status'] = '50'
-            response['message'] = 'Your credential are invalid.'
-        return jsonify(response)
-    else:
-        return redirect(url_for('main.index'))
-
-@api.route('/pricedetail', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_pricedetail():
-    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
-    # user_log('/', ip_list)
-    if request.method == 'POST':
-        apidata = request.form
-        app = current_app._get_current_object()
-        print(apidata)
-        response = {}
-        user = Ion_User.query.filter_by(id=apidata['id'], role_id=2).first()
-        if user is not None and user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['id'] = Rdb_Price()._data(price_id=(apidata['price_id']))
-                response['status'] = '00'
-        else:
-            response['status'] = '50'
-            response['message'] = 'Your credential are invalid.'
-        return jsonify(response)
-    else:
-        return redirect(url_for('main.index'))
-
-@api.route('/lanedetail', methods=['POST', 'GET'])
-@csrf.exempt
-def _api_lanedetail():
-    # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
-    # user_log('/', ip_list)
-    if request.method == 'POST':
-        apidata = request.form
-        app = current_app._get_current_object()
-        print(apidata)
-        response = {}
-        user = Ion_User.query.filter_by(id=apidata['id'], role_id=2).first()
-        if user is not None and user.verify_token(apidata['token']):
-            if int(apidata['status']) == 0:
-                response['id'] = Rdb_Lane()._data(_lane_id=(apidata['lane_id']))
+                response['id'] = Hop_Outlet()._data(outlet_id=(apidata['outlet_id']))
                 response['status'] = '00'
         else:
             response['status'] = '50'

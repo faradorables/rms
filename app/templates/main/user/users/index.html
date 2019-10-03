@@ -21,7 +21,7 @@
   <main id="dashboard_index">
     <div class="inmain_nav">
       <div class="title">
-        <h1>Plaza</h1>
+        <h1>User</h1>
       </div>
     </div>
     <div class="_container">
@@ -29,7 +29,7 @@
         <div class="col_10">
           <div class="card dashboard_card">
             <div class="col_2">
-              <h5 class="title"><i class="fas fa-archway"></i>Total Plaza</h5>
+              <h5 class="title"><i class="fas fa-user"></i>Total User</h5>
               <h2 class="value" id="total_users">-</h2>
               <span class="_growth positive"><span>12</span>% increase</span>
             </div>
@@ -39,8 +39,8 @@
               <span class="_growth positive"><span>12</span>% increase</span>
             </div>
             <div class="col_2">
-              <h5 class="title"><i class="fas fa-cash-register"></i>Total's wallet</h5>
-              <h2 class="value" id="total_wallet">-</h2>
+              <h5 class="title"><i class="fas fa-store-alt"></i>Total Outlet</h5>
+              <h2 class="value" id="total_outlet">-</h2>
               <span class="_growth negative"><span>12</span>% decrease</span>
             </div>
             <div class="col_2">
@@ -56,7 +56,7 @@
         <div class="col_10">
           <div class="card chart_card table_card _table_pagination">
             <h5 class="title">
-              <i class="fas fa-archway"></i>Plaza
+              <i class="fas fa-user"></i>User
               <div class="_filter">
                 <form>
                   <input type="text" placeholder="Search user">
@@ -68,10 +68,9 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Plaza Name</th>
-                    <th>Plaza Address</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Phone Number</th>
                     <th>Option</th>
                   </tr>
                 </thead>
@@ -92,7 +91,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            Plaza Detail
+            User Detail
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -106,10 +105,10 @@
                   <div class="profilePicture"></div>
                   <div class="detail">
                     <h3 id="detail_name"></h3>
-                    <p id="detail_address"></p>
-                    <p id="detail_client">-</p>
+                    <p id="detail_email"></p>
+                    <p id="detail_phone">-</p>
+                    <p id="detail_address">-</p>
                   </div>
-                  <button class="add" onclick="editPlazaForm()" style="margin-right:10px"><i class="fas fa-edit"></i>Edit Plaza</a>
                 </div>
               </div>
             </div>
@@ -117,8 +116,8 @@
           <div class="_row">
             <div class="card dashboard_card">
               <div class="col_2">
-                <h5 class="title"><i class="fas fa-road"></i>Total Lane</h5>
-                <h2 class="value" id="total_lane">-</h2>
+                <h5 class="title"><i class="fas fa-store-alt"></i>Total Outlet</h5>
+                <h2 class="value" id="outlet_by_user">-</h2>
               </div>
               <div class="col_2">
                 <h5 class="title"><i class="fa fa-tag"></i>Total Point</h5>
@@ -138,19 +137,21 @@
             <div class="col_10" style="padding-top: 0;">
               <div class="card chart_card table_card">
                 <h5 class="title">
-                  Plaza Lane
-                  <button class="add" onclick="addLaneForm()"><i class="fas fa-plus"></i>Add Lane</a>
+                  User's Outlet(s)
                 </h5>
                 <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Lane Name</th>
-                        <th>Lane Type</th>
+                        <th>Outlet Name</th>
+                        <th>Outlet Phone</th>
+                        <th>Outlet Adress</th>
+                        <th>Outlet City</th>
+                        <th>Outlet Province</th>
                         <th>Option</th>
                       </tr>
                     </thead>
-                  <tbody id="data_lane"></tbody>
+                  <tbody id="data_outlet"></tbody>
                 </table>
               </div>
             </div>
@@ -179,239 +180,16 @@
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Lane Name</th>
-                        <th>Lane Type</th>
+                        <th>Outlet Name</th>
+                        <th>Outlet Phone</th>
+                        <th>Outlet Adress</th>
+                        <th>Outlet City</th>
+                        <th>Outlet Province</th>
                         <th></th>
                       </tr>
                     </thead>
                   <tbody id="data_lane_all"></tbody>
                 </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="formPassword" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Verify PIN
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                    <div class="pass">
-                        <input id="pin" name="pin" type="password" placeholder="Input Your PIN..">
-                        <input type="checkbox" id="view_pass">
-                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
-                    </div>
-                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form()">Verify</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="addPlazaForm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Add Plaza
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                      <input id="name" name="name" type="text" placeholder="Plaza Name">
-                      <input id="address" name="address" type="text" placeholder="Plaza Address">
-                      <input id="image" type="file" name="image" placeholder="Photo.." accept=".JPG, .JPEG, .PNG">
-                      <input id="latitude" name="latitude" type="text" placeholder="Plaza Latitude">
-                      <input id="longitude" name="longitude" type="text" placeholder="Plaza Longitude">
-                      <button class="button_submit" data-dismiss="modal" onclick="add_plaza()">Submit</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="addLaneForm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Add Lane
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                      <input id="lane_name" name="lane_name" type="text" placeholder="Lane Name">
-                      <select id="role_body" name="role" placeholder="Role" style="width:100%; margin-bottom:10px">
-                        <option value="" disabled selected>Select Type..</option>
-                      </select>
-                      <button class="button_submit" data-dismiss="modal" onclick="add_lane()">Submit</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="editPlazaForm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Edit Plaza
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                      <input id="name2" name="name2" type="text" placeholder="Plaza Name">
-                      <input id="address2" name="address2" type="text" placeholder="Plaza Address">
-                      <input id="image2" type="file" name="image2" placeholder="Photo.." accept=".JPG, .JPEG, .PNG">
-                      <input id="latitude2" name="latitude2" type="text" placeholder="Plaza Latitude">
-                      <input id="longitude2" name="longitude2" type="text" placeholder="Plaza Longitude">
-                      <button class="button_submit" data-dismiss="modal" onclick="plazaPassword()">Submit</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="plazaPassword" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Verify Password
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                    <div class="pass">
-                        <input id="password" name="password" type="password" placeholder="Input Your Password..">
-                        <input type="checkbox" id="view_pass">
-                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
-                    </div>
-                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form3()">Verify</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="editLaneForm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Edit Lane
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                      <input id="lane_name2" name="lane_name2" type="text" placeholder="Lane Name">
-                      <select id="role_body2" name="role2" placeholder="Role" style="width:100%; margin-bottom:10px">
-                        <option value="" disabled selected>Select Type..</option>
-                      </select>
-                      <button class="button_submit" data-dismiss="modal" onclick="lanePassword()">Submit</button>
-                    <!-- </form> -->
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="lanePassword" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Verify Password
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col_10" style="padding-top: 0;">
-              <div class="card chart_card table_card _table_pagination">
-                  <div class="_register">
-                    <!-- <form> -->
-                    <div class="pass">
-                        <input id="password2" name="password2" type="password" placeholder="Input Your Password..">
-                        <input type="checkbox" id="view_pass">
-                        <label for="view_pass" class="glyphicon glyphicon-eye-close"></label>
-                    </div>
-                      <button type="submit" class="button_submit" data-dismiss="modal" onclick="redirect_to_form2()">Verify</button>
-                    <!-- </form> -->
-                  </div>
               </div>
             </div>
           </div>

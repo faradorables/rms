@@ -1,0 +1,198 @@
+{% extends "nav/base.html" %}
+
+{% block head %}
+    {{ super() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template/users.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin/outlet.js') }}"></script>
+    <script>
+        _users();
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+  <main id="dashboard_index">
+    <div class="inmain_nav">
+      <div class="title">
+        <h1>Outlet</h1>
+      </div>
+    </div>
+    <div class="_container">
+      <div class="_row">
+        <div class="col_10">
+          <div class="card dashboard_card">
+            <div class="col_2">
+              <h5 class="title"><i class="fas fa-store-alt"></i>Total Outlet</h5>
+              <h2 class="value" id="total_users">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fa fa-user"></i>Total Active User</h5>
+              <h2 class="value" id="total_active_users">-</h2>
+              <span class="_growth positive"><span>12</span>% increase</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fas fa-cash-register"></i>Total's wallet</h5>
+              <h2 class="value" id="total_wallet">-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+            <div class="col_2">
+              <h5 class="title"><i class="fas fa-chart-line"></i>Total's transaction</h5>
+              <h2 class="value last" id="total_trx">-</h2>
+              <span class="_growth negative"><span>12</span>% decrease</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="_row">
+        <div class="col_10">
+          <div class="card chart_card table_card _table_pagination">
+            <h5 class="title">
+              <i class="fas fa-store-alt"></i>Outlet
+              <div class="_filter">
+                <form>
+                  <input type="text" placeholder="Search user">
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+            </h5>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Outlet Name</th>
+                    <th>User Name</th>
+                    <th>E-Mail</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Province</th>
+                    <th>Option</th>
+                  </tr>
+                </thead>
+              <tbody id="data_outlet"></tbody>
+            </table>
+            <div class="_pagination _bottom_pagination">
+              <div class="page"><p><span class="small_data"></span>-<span class="big_data"></span> of <span class="total_data"></span><p></div>
+              <a class="disabled left_arrow" onclick="_prev_page()"><i class="fa fa-angle-left"></i></a>
+              <a class="right_arrow" onclick="_next_page()"><i class="fa fa-angle-right icon"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Outlet Detail
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card">
+                <div class="header">
+                  <div class="outletPicture"></div>
+                  <div class="detail">
+                    <h3 id="detail_name"></h3>
+                    <p id="detail_address"></p>
+                    <p id="detail_city">-</p>
+                    <p id="detail_province">-</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_row">
+            <div class="card dashboard_card">
+              <div class="col_2">
+                <h5 class="title"><i class="fas fa-road"></i>Total Lane</h5>
+                <h2 class="value" id="total_lane">-</h2>
+              </div>
+              <div class="col_2">
+                <h5 class="title"><i class="fa fa-tag"></i>Total Point</h5>
+                <h2 class="value" id="user_total_point">0</h2>
+              </div>
+              <div class="col_2">
+                <h5 class="title"><i class="fas fa-microchip"></i>Total OBU</h5>
+                <h2 class="value" id="user_total_obu">-</h2>
+              </div>
+              <div class="col_2">
+                <h5 class="title"><i class="fas fa-handshake"></i>Total Transactions</h5>
+                <h2 class="value last" id="user_total_trx">0</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card">
+                <h5 class="title">
+                  Outlet Transaction
+                </h5>
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Transaction Name</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                  <tbody id="data_lane"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="laneallmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            History Transaction
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col_10" style="padding-top: 0;">
+              <div class="card chart_card table_card">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Lane Name</th>
+                        <th>Lane Type</th>
+                      </tr>
+                    </thead>
+                  <tbody id="data_lane_all"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

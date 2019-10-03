@@ -1,7 +1,7 @@
 from datetime import datetime
 import hashlib
 import bleach
-from .models import Ion_User, Ion_Obu_List, Ion_Obu_Detail, Rdb_Client
+# from .models import Ion_User, Ion_Obu_List, Ion_Obu_Detail, Rdb_Client
 from flask import current_app, request, url_for, Flask
 from app.exceptions import ValidationError
 from . import db, login_manager

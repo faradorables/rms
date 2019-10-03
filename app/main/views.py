@@ -37,6 +37,6 @@ def index():
 def _page(sector):
     # ip_list = request.environ['HTTP_X_FORWARDED_FOR']
     # user_log('/', ip_list)
-    if sector not in ['users', 'pricing', 'addprice']:
+    if sector not in ['dashboard','users', 'admin', 'outlet']:
         abort(404)
     return render_template('main/user/' + sector + '/index.html')

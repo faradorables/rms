@@ -1,17 +1,17 @@
 <script src="{{ url_for('static', filename='js/admin/users.js') }}"></script>
 <nav id="sidenav_1" class="sidenav" data-status="true">
     <div>
-      <!-- <a href="#" id="nav_dashboard" onclick="nav_href('dashboard')">
+      <a href="#" id="nav_dashboard" onclick="nav_href('dashboard')">
           <i class="fa fa-laptop"></i>
           <p>Dashboard</p>
-      </a> -->
-      <a id="nav_usernav" class="_output_3">
-          <i class="fas fa-archway"></i>
-          <p>Plaza</p>
       </a>
-      <a id="nav_pricingnav" class="_output_3">
-          <i class="fas fa-money-bill-wave"></i>
-          <p>Pricing</p>
+      <a href="#" id="nav_user" onclick="nav_href('users')">
+          <i class="fa fa-user"></i>
+          <p>List User</p>
+      </a>
+      <a href="#" id="nav_outlet" onclick="nav_href('outlet')">
+          <i class="fas fa-store-alt"></i>
+          <p>Outlet</p>
       </a>
       <!-- <a id="nav_bujtnav" class="_output_3">
           <i class="fas fa-road"></i>
@@ -28,11 +28,11 @@
       <a id="nav_mailboxes"  onclick="nav_href('mailboxes')">
           <i class="fa fa-envelope"></i>
           <p>Mailboxes</p>
-      </a>
+      </a> -->
       <a href="#" id="nav_admin" onclick="nav_href('admin')">
           <i class="fa fa-users"></i>
           <p>Admin</p>
-      </a> -->
+      </a>
       <a id="nav_settings" class="_output_2">
           <i class="fa fa-cogs"></i>
           <p>Pengaturan</p>
@@ -67,36 +67,6 @@
     <a href="#" id="nav_settings_sign_out" onclick="logout()">
         <i class="fa fa-sign-out"></i>
         <p>Keluar</p>
-    </a>
-</div>
-
-<div class="sidenav3" id="usernav">
-    <a href="#" class="sidenav3_close">
-        <i class="fa fa-angle-left"></i>
-        <p>Close</p>
-    </a>
-    <a href="#" id="nav_user" onclick="nav_href('users')">
-        <i class="fas fa-list-alt"></i>
-        <p>List Plaza</p>
-    </a>
-    <a href="#" id="nav_usernav_history_log" onclick="formPassword()">
-        <i class="fa fa-plus"></i>
-        <p>Add Plaza</p>
-    </a>
-</div>
-
-<div class="sidenav3" id="pricingnav">
-    <a href="#" class="sidenav3_close">
-        <i class="fa fa-angle-left"></i>
-        <p>Close</p>
-    </a>
-    <a href="#" id="nav_pricing" onclick="nav_href('pricing')">
-        <i class="fas fa-list-alt"></i>
-        <p>List Price</p>
-    </a>
-    <a href="#" id="nav_pricingnav_history_log" onclick="nav_href('addprice')">
-        <i class="fa fa-plus"></i>
-        <p>Add Price</p>
     </a>
 </div>
 

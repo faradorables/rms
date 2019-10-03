@@ -23,27 +23,18 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    # SQLALCHEMY_DATABASE_URI = 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ion'}
-    SQLALCHEMY_DATABASE_URI = 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ams'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:password@localhost:3306/ams'
     SQLALCHEMY_BINDS = {
-        'users': 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ion',
-        'toll': 'mysql://ionapi:!2345iondbapi5432!@209.97.175.39:3306/rdb'
+        'hop': 'mysql://root:password@localhost:3306/ion_biz',
     }
-    # SQLALCHEMY_DATABASE_URI = 'mysql://root:password@localhost:3306/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://root:password@localhost:3306/ion'}
+
     MONGO_DBNAME = 'ion'
     MONGO_URI = 'mongodb://iondb:!2345iondb0005432!@209.97.175.39/ion'
 
 class TestingConfig(Config):
-    # TESTING = TrueSQLALCHEMY_DATABASE_URI = 'mysql://root:password@localhost/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://root:password@localhost/ion'}
-    # SQLALCHEMY_DATABASE_URI = 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ion'}
-    SQLALCHEMY_DATABASE_URI = 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ams'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:!2345cpidb5432!@178.128.30.90:3306/ams'
     SQLALCHEMY_BINDS = {
-        'users': 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ion',
-        'toll': 'mysql://ionapi:!2345iondbapi5432!@209.97.175.39:3306/rdb'
+        'hop': 'mysql://root:password@localhost:3306/ion_biz',
     }
     WTF_CSRF_ENABLED = False
     MONGO_DBNAME = 'ion'
@@ -51,14 +42,9 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = 'mysql://root:password@localhost/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://root:password@localhost/ion'}
-    # SQLALCHEMY_DATABASE_URI = 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ams'
-    # SQLALCHEMY_BINDS = {'users': 'mysql://ionams:!2345iondbams5432!@209.97.175.39:3306/ion'}
-    SQLALCHEMY_DATABASE_URI = 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ams'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:!2345cpidb5432!@178.128.30.90:3306/ams'
     SQLALCHEMY_BINDS = {
-        'users': 'mysql://ionbiller:!2345iondbbiller5432!@209.97.175.39:3306/ion',
-        'toll': 'mysql://ionapi:!2345iondbapi5432!@209.97.175.39:3306/rdb'
+        'hop': 'mysql://root:password@localhost:3306/ion_biz',
     }
     MONGO_DBNAME = 'ion'
     MONGO_URI = 'mongodb://iondb:!2345iondb0005432!@209.97.175.39/ion'

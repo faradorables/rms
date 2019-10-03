@@ -1,6 +1,6 @@
 {% extends "nav/base.html" %}
 
-{% block title %}ION AMS| Road Management System{% endblock %}
+{% block title %}ION AMS| Admin Management System{% endblock %}
 
 {% block head %}
     {{ super() }}
@@ -25,8 +25,8 @@
   {% include 'main/macros/_notif.html' %}
   <main id="auth_login">
       <form method="post" autocomplete="false">
-          <img src="{{ url_for('static', filename='src/logo.png') }}">
-          <h2>Road Management System</h2>
+          <img src="{{ url_for('static', filename='src/hop.jpeg') }}">
+          <h2>Admin Management System</h2>
           <input name="email" id="email" type="email" placeholder="Client E-Mail..">
           <div class="pass">
               <input id="pin" name="pin" type="password" placeholder="PIN..">
